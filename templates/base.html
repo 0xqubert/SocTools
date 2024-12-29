@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+    #loading {
+        position: absolute;
+    	text-align:center; /* Align text to the left */
+    	margin:0px;
+    	padding-left: 10px;
+        background-color: #2d3748;
+        padding: 15px;
+        border-radius: 5px;
+        z-index: 1000;
+    }
+    </style>
+</head>
+<body>
+	<div class="navbar">
+		<div class="navbar-left">
+			<img src="/static/images/logo.webp" alt="logo">
+			<span><h1>SOC Tools</h1></span>
+		</div>
+		<div class="navbar-right">
+			<a href="/">Home</a>
+			 <div class="dropdown">
+				<a href="#">EXO Utils ▼</a>
+				<div class="dropdown-content">
+					<a href="/harddelete">HardDelete</a>
+					<a href="/revokemessage">Revoke Messages</a>
+					<a href="/omeportal">OMEPortal</a>
+				</div>
+			</div>
+			<a href="#">Daily Tasks ▼</a>
+			<a href="#">Monitoring ▼</a>
+			<a href="#">Misc ▼</a>
+			<a href="#">Help ▼</a>
+			<input type="text" placeholder="Search..." class="search-input">
+			<a style="margin-right: 10px" href="#">☼</a>
+			<img src="/static/images/Capture.PNG" alt="profile">	
+		</div>
+	</div>
+	<br>
+	{% block content %}
+	{% endblock %}
+</body>
+</html>

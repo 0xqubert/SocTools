@@ -1,0 +1,146 @@
+<!--harddelete.html-->
+{% extends "base.html" %}
+{% block title %}HardDelete{% endblock %}
+{% block content %}
+    <h1>Hard Delete</h1>
+    <button class="menu-button" data-action="SetSearchName">Set Search Name</button>
+    <button class="menu-button" data-action="PerformHardDelete">Perform HardDelete</button>
+    <button class="menu-button" data-action="UpdatePurgeStatus">Update Purge Status</button>
+    <button class="menu-button" data-action="ClearResults">Clear Results</button>
+    <br>
+    <input type="text" id="inputField" placeholder="Enter Search Name">
+    <br></br>
+    <div class="status-container">
+        <div class="status-item">
+            <span class="status-label">Search Name:</span>
+            <span class="status-value" id="searchNameDisplay">{{ searchName }}</span>
+        </div>
+         <div class="status-item">
+            <span class="status-label">Search Info:</span>
+            <span class="status-value" id="searchInfoDisplay">{{ searchInfo }}</span>
+        </div>
+        <div class="status-item">
+            <span class="status-label">Purge Status:</span>
+            <span class="status-value" id="purgeStatusDisplay">{{ purgeStatus }}</span>
+        </div>
+    </div>
+	<div id="result"></div>
+    <div id="loading" style="display: none;">Loading...</div>
+    <script>
+        const menuButtons = document.querySelectorAll(".menu-button");
+		const loadingDiv = document.getElementById("loading");
+        const HostnameDisplay = document.getElementById("HostnameDisplay");
+        const UsertableDisplay = document.getElementById("UsertableDisplay");
+		const statusMessageDiv = document.getElementById("status-message");
+        let eventSource = null;
+
+        function UpdateElements(result){
+            if(result.action == "GetSocPcInfo")
+            {
+                HostnameDisplay.innerText = result.output.computerName;
+                UsertableDisplay.innerText = result.output.currentUser;
+            }
+        }
+
+        async function sendCommand(action, input) {
+            loadingDiv.style.display = "block";
+			statusMessageDiv.innerText = `Sending command from index.html: ${action}...`;
+            const body = {
+                "action": action,
+            };
+            if(input){
+                body.input = input;
+            }
+            try {
+                const response = await fetch('/events', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body),
+                });
+                if (!response.ok) {
+                    statusMessageDiv.innerText = `Error: Command: ${action} failed.`;
+                    loadingDiv.style.display = "none";
+                     const err = await response.json();
+                     throw new Error(err.error)
+                }
+
+                loadingDiv.style.display = "none";
+                const result = await response.json();
+				statusMessageDiv.innerText = `Command: ${action} completed successfully.`;
+                if (result && result.action) {
+                    UpdateElements(result)
+                }
+             }
+             catch(error){
+                 statusMessageDiv.innerText = `Command: ${action} had an error: ${error.message}`;
+                loadingDiv.style.display = "none";
+                console.error("Error:", error.message);
+             }
+        }
+        menuButtons.forEach(button => {
+            button.addEventListener("click", function(){
+                const action = this.getAttribute('data-action');
+                if(action === "RevokeMessage")
+                {
+                   const messageId = prompt("Enter the Message ID's separated by newlines");
+                   sendCommand(action, messageId)
+                }
+                 else if (action === "SetSearchName")
+                 {
+                    const searchName = prompt("Enter the Search Name");
+                    sendCommand(action, searchName);
+                }
+                 else
+                {
+                  sendCommand(action);
+                }
+            });
+        });
+
+        function setupSSE() {
+        	console.log("setupSSE started"); // Log before creating the event source
+        	eventSource = new EventSource("/events");
+        
+        	eventSource.onopen = function() {
+                console.log("SSE connection opened."); // Log when connection opens
+            }
+            eventSource.onmessage = function(event) {
+                if (!event.data || typeof event.data !== 'string') {
+                    console.warn("Invalid event data:", event.data);
+                    return;
+                }
+                try {
+                    const data = JSON.parse(event.data);
+                    if(data && data.message)
+                    {
+                        console.log(`message from server: ${data.message}`)
+                    }
+                } catch (error) {
+                    console.error("Error parsing SSE data:", error);
+                    console.error("SSE Event Data:", event.data);
+                    console.error("Error Type:", error.name);
+                    console.error("Error Message:", error.message);
+                }
+            };
+            eventSource.onerror = function(error) {
+                console.error("SSE error:", error);
+            };
+        }
+
+
+		window.addEventListener('load', function() {
+            console.log("window load event started");
+        	setupSSE();
+			loadingDiv.style.display = "none"; //hide the loading div on first load
+            console.log("window load event finished");
+        });
+
+        window.addEventListener('beforeunload', function() {
+            if (eventSource) {
+                eventSource.close();
+            }
+        });
+    </script>
+{% endblock %}

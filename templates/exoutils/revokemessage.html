@@ -1,0 +1,146 @@
+<!--revokemessage.html-->
+{% extends "base.html" %}
+{% block title %}Revoke Messages{% endblock %}
+{% block content %}
+    <h1>Revoke Message</h1>
+	<button class="menu-button" data-action="RevokeMessage">Revoke Message(s)</button>
+    <button class="menu-button" data-action="CheckRevokeStatus">Check Revoke Status</button>
+	<br>
+    <textarea id="inputField" placeholder="Enter MessageID(s)" rows="10"></textarea>
+	<br></br>
+    
+    <div class="status-container">
+         <div class="status-item">
+            <span class="status-label">Revoke Status:</span>
+            <span class="status-value">{{ revokeStatus }}</span>
+        </div>
+    </div>
+    <div id="result"></div>
+
+    <script>
+        const menuButtons = document.querySelectorAll(".menu-button");
+        const resultDiv = document.getElementById("result");
+		const loadingDiv = document.getElementById("loading");
+        const searchNameDisplay = document.getElementById("searchNameDisplay");
+        const searchInfoDisplay = document.getElementById("searchInfoDisplay");
+        const purgeStatusDisplay = document.getElementById("purgeStatusDisplay");
+        let eventSource = null;
+
+
+        function clearResults(){
+            resultDiv.innerText = "";
+        }
+        //function logToApp(message) {
+        //    fetch('/log', {
+        //        method: 'POST',
+        //        headers: { 'Content-Type': 'application/json' },
+        //        body: JSON.stringify({ message: message })
+        //    }); // intentionally not awaiting or handling response
+        //}
+
+        function updateStatusDisplay(data){
+            if (data.action === "SetSearchName"){
+                searchInfoDisplay.innerText = data.searchInfo;
+             }
+            if (data.searchName) {
+                searchNameDisplay.innerText = data.searchName;
+            }
+             if (data.searchInfo) {
+                searchInfoDisplay.innerText = data.searchInfo;
+            }
+            if (data.purgeStatus) {
+                purgeStatusDisplay.innerText = data.purgeStatus;
+            }
+        }
+
+        function updateStatusDisplay(data){
+			if (!data) {
+                console.warn("updateStatusDisplay received no data.")
+                return;
+            }
+            if (data.Hostname) {
+                HostnameDisplay.innerText = data.Hostname;
+            }
+            if (data.Usertable) {
+                UsertableDisplay.innerText = data.Usertable;
+            }
+        }
+         function sendCommand(action) {
+            loadingDiv.style.display = "block";
+			statusMessageDiv.innerText = `Sending command: ${action}...`;
+            fetch('/execute', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    action: action,
+                   input: ""
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+					statusMessageDiv.innerText = `Error: Command: ${action} failed.`;
+                    loadingDiv.style.display = "none";
+                    return response.json().then(err => { throw new Error(err.error)});
+                }
+                 loadingDiv.style.display = "none";
+                return response.json();
+            })
+             .then(data => {
+				statusMessageDiv.innerText = `Command: ${action} completed successfully.`;
+                resultDiv.innerText = data.output;
+            })
+            .catch(error => {
+				statusMessageDiv.innerText = `Command: ${action} had an error: ${error.message}`;
+                loadingDiv.style.display = "none";
+                console.error("Error:", error.message);
+            });
+        }
+        menuButtons.forEach(button => {
+            button.addEventListener("click", function(){
+                const action = this.getAttribute('data-action');
+                sendCommand(action)
+            });
+        });
+
+        function setupSSE() {
+        	console.log("setupSSE started");
+        	eventSource = new EventSource("/status_updates");
+        
+        	eventSource.onopen = function() {
+                console.log("SSE connection opened.");
+            }
+            eventSource.onmessage = function(event) {
+                if (!event.data || typeof event.data !== 'string') {
+                    console.warn("Invalid event data:", event.data);
+                    return;
+                }
+                try {
+                    const data = JSON.parse(event.data);
+                    updateStatusDisplay(data);
+                } catch (error) {
+                    console.error("Error parsing SSE data:", error);
+                    console.error("SSE Event Data:", event.data);
+                    console.error("Error Type:", error.name);
+                    console.error("Error Message:", error.message);
+                }
+            };
+             eventSource.onerror = function(error) {
+                 console.error("SSE error:", error);
+             };
+        }
+
+
+		window.addEventListener('load', function() {
+            console.log("window load event started");
+        	setupSSE();
+			loadingDiv.style.display = "none"; //hide the loading div on first load
+            console.log("window load event finished");
+        });
+
+        window.addEventListener('beforeunload', function() {
+            if (eventSource) {
+                eventSource.close();
+            }
+        });
+    </script>
+{% endblock %}

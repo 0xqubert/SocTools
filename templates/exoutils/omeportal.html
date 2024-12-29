@@ -1,0 +1,166 @@
+<!--omeportal.html-->
+{% extends "base.html" %}
+{% block title %}OME Portal{% endblock %}
+{% block content %}
+    <h1>OME Portal</h1>
+    <div class="status-container">
+        <div class="status-item">
+            <span class="status-label">Search String:</span>
+            <span class="status-value" id="searchStringDisplay">{{ searchString }}</span>
+        </div>
+    </div>
+    <div class="input-row">
+        <button class="menu-button set-button" data-action="SetStartDate">Set Start Date</button>
+		 <input type="text" id="startDateInput" placeholder="Set Start Date">
+    </div>
+      <div class="input-row">
+        <button class="menu-button set-button" data-action="SetEndDate">Set End Date</button>
+		 <input type="text" id="endDateInput" placeholder="Set End Date">
+    </div>
+	 <div class="input-row">
+        <button class="menu-button set-button" data-action="SetUser">Set User</button>
+		 <input type="text" id="userInput" placeholder="Set User">
+    </div>
+    <div class="input-row">
+        <button class="menu-button set-button" data-action="SetMessageID">Set MessageID</button>
+		 <input type="text" id="messageIDInput" placeholder="Set MessageID">
+    </div>
+    <div class="input-row">
+        <button class="operations-button" data-operation="MessageAccess">MessageAccess</button>
+		<button class="operations-button" data-operation="AttachmentDownload">AttachmentDownload</button>
+        <button class="operations-button" data-operation="AuthenticationRequest">AuthenticationRequest</button>
+        <button class="operations-button" data-operation="MessageForward">MessageForward</button>
+    </div>
+
+    <button class="menu-button" data-action="SEARCH">SEARCH</button>
+	<button class="menu-button" data-action="ClearSearchResults">Clear Search Results</button>
+    <br>
+    <div id="result"></div>
+
+    <script>
+        const menuButtons = document.querySelectorAll(".menu-button");
+        const resultDiv = document.getElementById("result");
+		const loadingDiv = document.getElementById("loading");
+        const searchNameDisplay = document.getElementById("searchNameDisplay");
+        const searchInfoDisplay = document.getElementById("searchInfoDisplay");
+        const purgeStatusDisplay = document.getElementById("purgeStatusDisplay");
+        let eventSource = null;
+
+
+        function clearResults(){
+            resultDiv.innerText = "";
+        }
+        //function logToApp(message) {
+        //    fetch('/log', {
+        //        method: 'POST',
+        //        headers: { 'Content-Type': 'application/json' },
+        //        body: JSON.stringify({ message: message })
+        //    }); // intentionally not awaiting or handling response
+        //}
+
+        function updateStatusDisplay(data){
+            if (data.action === "SetSearchName"){
+                searchInfoDisplay.innerText = data.searchInfo;
+             }
+            if (data.searchName) {
+                searchNameDisplay.innerText = data.searchName;
+            }
+             if (data.searchInfo) {
+                searchInfoDisplay.innerText = data.searchInfo;
+            }
+            if (data.purgeStatus) {
+                purgeStatusDisplay.innerText = data.purgeStatus;
+            }
+        }
+
+        function updateStatusDisplay(data){
+			if (!data) {
+                console.warn("updateStatusDisplay received no data.")
+                return;
+            }
+            if (data.Hostname) {
+                HostnameDisplay.innerText = data.Hostname;
+            }
+            if (data.Usertable) {
+                UsertableDisplay.innerText = data.Usertable;
+            }
+        }
+         function sendCommand(action) {
+            loadingDiv.style.display = "block";
+			statusMessageDiv.innerText = `Sending command: ${action}...`;
+            fetch('/execute', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    action: action,
+                   input: ""
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+					statusMessageDiv.innerText = `Error: Command: ${action} failed.`;
+                    loadingDiv.style.display = "none";
+                    return response.json().then(err => { throw new Error(err.error)});
+                }
+                 loadingDiv.style.display = "none";
+                return response.json();
+            })
+             .then(data => {
+				statusMessageDiv.innerText = `Command: ${action} completed successfully.`;
+                resultDiv.innerText = data.output;
+            })
+            .catch(error => {
+				statusMessageDiv.innerText = `Command: ${action} had an error: ${error.message}`;
+                loadingDiv.style.display = "none";
+                console.error("Error:", error.message);
+            });
+        }
+        menuButtons.forEach(button => {
+            button.addEventListener("click", function(){
+                const action = this.getAttribute('data-action');
+                sendCommand(action)
+            });
+        });
+
+        function setupSSE() {
+        	console.log("setupSSE started");
+        	eventSource = new EventSource("/status_updates");
+        
+        	eventSource.onopen = function() {
+                console.log("SSE connection opened.");
+            }
+            eventSource.onmessage = function(event) {
+                if (!event.data || typeof event.data !== 'string') {
+                    console.warn("Invalid event data:", event.data);
+                    return;
+                }
+                try {
+                    const data = JSON.parse(event.data);
+                    updateStatusDisplay(data);
+                } catch (error) {
+                    console.error("Error parsing SSE data:", error);
+                    console.error("SSE Event Data:", event.data);
+                    console.error("Error Type:", error.name);
+                    console.error("Error Message:", error.message);
+                }
+            };
+             eventSource.onerror = function(error) {
+                 console.error("SSE error:", error);
+             };
+        }
+
+
+		window.addEventListener('load', function() {
+            console.log("window load event started");
+        	setupSSE();
+			loadingDiv.style.display = "none"; //hide the loading div on first load
+            console.log("window load event finished");
+        });
+
+        window.addEventListener('beforeunload', function() {
+            if (eventSource) {
+                eventSource.close();
+            }
+        });
+    </script>
+{% endblock %}

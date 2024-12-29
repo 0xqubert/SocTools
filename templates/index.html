@@ -1,0 +1,286 @@
+<!--index.html-->
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <div class="heading-container">
+        <h1>SOC PC Information</h1>
+        <h4 id="status-message"></h4>
+    </div>
+    <div id="loading" style="display: none;">Loading...</div>
+    <div id="main-container">
+        <div id="left-pc-container"></div>
+            <div class="refresh-dropdown">
+                <label for="refreshInterval">Refresh Interval:</label>
+                <select id="refreshInterval" class="refresh-interval-select">
+                    <option value="-1">Off</option>
+                    <option value="5">5 Seconds</option>
+                    <option value="10">10 Seconds</option>
+                    <option value="30">30 Seconds</option>
+                    <option value="60">1 Minute</option>
+                    <option value="120">2 Minutes</option>
+                    <option value="300">5 Minutes</option>
+                </select>
+            </div>
+     </div>
+
+	<script>
+        const menuButtons = document.querySelectorAll(".menu-button");
+        const resultDiv = document.getElementById("result");
+		const loadingDiv = document.getElementById("loading");
+        const HostnameDisplay = document.getElementById("HostnameDisplay");
+        const UsertableDisplay = document.getElementById("UsertableDisplay");
+		const statusMessageDiv = document.getElementById("status-message");
+        const leftPcContainer = document.getElementById("left-pc-container");
+        let eventSource = null;
+
+
+        function createPCSection(pcData, index) {
+            const pcSection = document.createElement('div');
+            pcSection.classList.add('pc-section');
+
+            const rdpButton = document.createElement('button');
+            rdpButton.classList.add('rdp-button')
+            rdpButton.textContent = `Connect to ${pcData.output.computername}`;
+            rdpButton.addEventListener('click', () => {
+               //Logic to connect to RDP goes here.
+               console.log("Attempting to connect to PC", index + 1)
+               statusMessageDiv.innerText = `Attempting to connect to PC ${index + 1}`;
+
+             });
+
+            const hostname = document.createElement('div');
+            hostname.innerHTML = `<h2 style="margin: 0px">${pcData.output.computername || 'N/A'}</h2>`;
+
+            const currentUser = document.createElement('div');
+            currentUser.innerHTML = `
+                <table class="styled-table">
+                  <tr>
+                    <th>Username</th>
+                    <th>Session</th>
+                    <th>ID</th>
+                    <th>State</th>
+                    <th>Idle Time</th>
+                    <th>Logon Time</th>
+                  </tr>
+                  <tr>
+                    <td id="${pcData.output.computername}-username"></td>
+                    <td id="${pcData.output.computername}-sessionname"></td>
+                    <td id="${pcData.output.computername}-id"></td>
+                    <td id="${pcData.output.computername}-state"></td>
+                    <td id="${pcData.output.computername}-idletime"></td>
+                    <td id="${pcData.output.computername}-logontime"></td>
+                  </tr>
+                </table>`;
+            //currentUser.innerHTML = `<span id="${pcData.output.computername}"class="status-label">loading...</span>`;
+
+            const sysinfo = document.createElement('div');
+            sysinfo.classList.add('system-info-list');
+            sysinfo.innerHTML = `
+              <h2>System Info:</h2>
+                <ul>
+                    <li><span class="status-label">Diskspace:</span>${pcData.output.freespace} GB free out of ${pcData.output.drivesize} GB</li>
+                    <li><span class="status-label">BIOS Info:</span> N/A</li>
+                    <li><span class="status-label">OS:</span> N/A</li>
+                    <li><span class="status-label">CPU Info:</span> N/A</li>
+                    <li><span class="status-label">Last Reboot:</span> ${convertJsonDate(pcData.output.lastreboot)}</li>
+                </ul>
+            `;
+
+            const software = document.createElement('div');
+            software.classList.add('system-info-list');
+            software.innerHTML = `
+                <h2>Software Versions:</h2>
+                <ul>
+                    <li><span class="status-label">Forcepoint:</span> N/A</li>
+                    <li><span class="status-label">Zscaler Agent:</span> N/A</li>
+                    <li><span class="status-label">Crowdstrike Agent:</span> N/A</li>
+                    <li><span class="status-label">Cisco Anyconnect Agent:</span> N/A</li>
+                    <li><span class="status-label">Visual Studio Code:</span>${pcData.output.visualstudio || 'N/A'}</li>
+                </ul>
+            `;
+
+
+            const headerContainer = document.createElement('div');
+            headerContainer.classList.add('hostname-user-container'); // Add a container class
+            headerContainer.appendChild(hostname);
+            headerContainer.appendChild(rdpButton);
+
+
+            const userContainer = document.createElement('div');
+            userContainer.classList.add('hostname-user-container'); // Add a container class
+            userContainer.appendChild(currentUser);
+    
+
+            const pcInfoContainer = document.createElement('div');
+            pcInfoContainer.classList.add('list-container'); // Add a container class
+            pcInfoContainer.appendChild(sysinfo);
+            pcInfoContainer.appendChild(software);
+
+            pcSection.appendChild(headerContainer);
+            pcSection.appendChild(userContainer);
+            pcSection.appendChild(pcInfoContainer);
+
+            return pcSection;
+        }
+
+        
+
+
+        async function sendCommand(action, input, index) {
+            loadingDiv.style.display = "block";
+			statusMessageDiv.innerText = `Sending command from index.html: ${action}...`;
+              const body = {
+                    "action": action,
+                };
+            if(input)
+            {
+                body.input = input;
+            }
+            try {
+                const response = await fetch('/events', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body),
+                });
+                if (!response.ok) {
+                    statusMessageDiv.innerText = `Error: Command: ${action} failed.`;
+                    loadingDiv.style.display = "none";
+                    const err = await response.json();
+                    throw new Error(err.error)
+                }
+
+                loadingDiv.style.display = "none";
+                const result = await response.json();
+				statusMessageDiv.innerText = `Command: ${action} completed successfully.`;
+                console.log("Received data: ", result)
+                if(result && result.action)
+                {
+                    if(result.action == "GetSocPcInfo"){
+                        const pcSection =  createPCSection(result, index)
+                        leftPcContainer.appendChild(pcSection)
+                        sendCommand("GetCurrentUserInfo", null, 0)
+                    }
+                    if(result.action == "GetCurrentUserInfo"){
+                        (document.getElementById(`${result.output.table[0]}-username`)).innerText = result.output.table[1];
+                        (document.getElementById(`${result.output.table[0]}-sessionname`)).innerText = result.output.table[2];
+                        (document.getElementById(`${result.output.table[0]}-id`)).innerText = result.output.table[3];
+                        (document.getElementById(`${result.output.table[0]}-state`)).innerText = result.output.table[4];
+                        (document.getElementById(`${result.output.table[0]}-idletime`)).innerText = result.output.table[5];
+                        (document.getElementById(`${result.output.table[0]}-logontime`)).innerText = result.output.table[6];
+                    }
+                }
+                else
+                {
+                    console.log("Received data but not handling specific action.")
+                    console.log("Received data: ", result)
+                }
+
+            }
+            catch(error){
+                statusMessageDiv.innerText = `Command: ${action} had an error: ${error.message}`;
+                loadingDiv.style.display = "none";
+                console.error("Error:", error.message);
+            }
+        }
+        function setupSSE() {
+            console.log("setupSSE started"); // Log before creating the event source
+            eventSource = new EventSource("/events");
+
+            eventSource.onopen = function() {
+                console.log("SSE connection opened."); // Log when connection opens
+                sendCommand("GetSocPcInfo", null, 0)
+            }
+            eventSource.onmessage = function(event) {
+                if (!event.data || typeof event.data !== 'string') {
+                    console.warn("Invalid event data:", event.data);
+                    return;
+                }
+                try {
+                    const result = JSON.parse(event.data);
+                    console.log("Parsed SSE data:", result)
+                    if(result.action == "GetCurrentUserInfo"){
+                        (document.getElementById(`${result.output.table[0]}-username`)).innerText = result.output.table[1];
+                        (document.getElementById(`${result.output.table[0]}-sessionname`)).innerText = result.output.table[2];
+                        (document.getElementById(`${result.output.table[0]}-id`)).innerText = result.output.table[3];
+                        (document.getElementById(`${result.output.table[0]}-state`)).innerText = result.output.table[4];
+                        (document.getElementById(`${result.output.table[0]}-idletime`)).innerText = result.output.table[5];
+                        (document.getElementById(`${result.output.table[0]}-logontime`)).innerText = result.output.table[6];
+                    }
+                } catch (error) {
+                    console.error("Error parsing SSE data:", error);
+                    console.error("SSE Event Data:", event.data);
+                    console.error("Error Type:", error.name);
+                    console.error("Error Message:", error.message);
+                }
+            };
+            eventSource.onerror = function(error) {
+                console.error("SSE error:", error);
+            };
+        }
+
+
+		window.addEventListener('load', function() {
+            console.log("window load event started");
+        	setupSSE();
+			loadingDiv.style.display = "none"; //hide the loading div on first load
+            console.log("window load event finished");
+        });
+
+
+        // Get a reference to the select dropdown element
+        const refreshIntervalSelect = document.getElementById('refreshInterval');
+
+        // Attach an event listener to detect when the user makes a selection.
+        refreshIntervalSelect.addEventListener('change', function() {
+        // retrieve the value
+            const selectedInterval = parseInt(refreshIntervalSelect.value);
+            console.log('Selected Refresh Interval:', selectedInterval);
+            action = "changeRefreshInterval"
+            sendCommand(action, selectedInterval, 0)
+        });
+        
+
+        window.addEventListener('beforeunload', function() {
+            if (eventSource) {
+                eventSource.close();
+            }
+        });
+        menuButtons.forEach(button => {
+            button.addEventListener("click", function(){
+                const action = this.getAttribute('data-action');
+                if(action === "RevokeMessage")
+                {
+                   const messageId = prompt("Enter the Message ID's separated by newlines");
+                   sendCommand(action, messageId, 0)
+                }
+                 else if (action === "SetSearchName")
+                 {
+                    const searchName = prompt("Enter the Search Name");
+                    sendCommand(action, searchName, 0);
+                }
+                 else
+                {
+                  sendCommand(action, null, 0);
+                }
+            });
+        });
+
+        function convertJsonDate(jsonDate) {
+            if (!jsonDate){
+                return "No data";
+            }
+            const match = jsonDate.match(/^\/Date\((\d+)\)\/$/);
+            if (match) {
+                const milliseconds = parseInt(match[1], 10);
+                if(!isNaN(milliseconds)){
+                    fulldate = new Date(milliseconds).toString();
+                    date = fulldate.replace(" GMT-0800 (Pacific Standard Time)", "")
+                    return date;
+                }
+            }
+                return "Invalid timestamp"
+        }
+    </script>
+{% endblock %}

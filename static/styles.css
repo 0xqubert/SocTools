@@ -1,0 +1,390 @@
+/*styles.css*/
+/* General Styles */
+body {
+    font-family: sans-serif;
+    background-color: #1a202c;
+    color: #dbdbdb;
+    margin: 0;
+    padding: 20px;
+    margin-top: 50px;
+}
+/* Navbar Styles */
+.navbar {
+    background-color: #2d3748;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #4a5568;
+    line-height: 1.2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border: 1px solid #000000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+.navbar-left, .navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar a, .navbar span {
+    color: #dbdbdb;
+    text-decoration: none;
+    align-items: center;
+    display: flex;
+    line-height: 1.2;
+}
+
+.navbar-left img, .navbar-right img {
+    border-radius: 50%;
+    object-fit: cover;
+    height: auto;
+}
+.navbar-left img {
+    width: 75px;
+}
+.navbar-right img {
+    width: 50px;
+    margin-right: 15px;
+}
+
+.navbar-right a {
+    padding: 10px;
+    margin-left: 2.5px;
+    margin-right: 2.5px;
+}
+
+.navbar-right a:hover {
+    display: inline-block;
+    padding: 10px;
+    background-color: rgb(37, 114, 255);
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+.navbar .search-input {
+    padding: 8px;
+    background-color: #343d4e;
+    color: #dbdbdb;
+    border: 1px solid #4a5568;
+    font-size: 1.1rem;
+    border-radius: 5px;
+
+}
+
+
+.navbar .dropdown:hover .dropdown-content {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.navbar .dropdown-content {
+    display: none;
+    position: absolute;
+    width: max-content; 
+    padding: 0px;
+    border: 1px solid #4a5568;
+    border-radius: 8px;
+    background-color: #343d4e;
+    box-shadow: 0px 0px 6px 3px #00000077;
+    color: #dbdbdb;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+}
+
+
+.navbar .dropdown-content a {
+    display: block; /* Make it fill the container */
+    padding-top: 8px; /* Add some padding around the text */
+    padding-bottom: 8px;
+    text-align: left; /* Align text to the left */
+    text-decoration: none; /* removes underlines from links*/
+    box-sizing: border-box; /*makes it so that the padding does not affect the overall size of the object*/
+    margin-right: 0px;
+    margin-left: 0px;
+    padding-left: 10px;
+}
+
+.navbar .dropdown-content a:hover {
+    background-color: rgb(37, 114, 255);
+    color: #ffffff;
+}
+
+
+.refresh-dropdown {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.refresh-dropdown label {
+    margin-right: 5px;
+    color: #dbdbdb;
+}
+
+.refresh-interval-select {
+    padding: 8px;
+    border: 1px solid #4a5568;
+    border-radius: 4px;
+    background-color: #343d4e;
+    color: #dbdbdb;
+    font-size: 1.1rem;
+}
+
+
+/* Button Styles */
+.menu-button, .operations-button, .rdp-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #2fb344;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+.menu-button:hover, .operations-button:hover, .rdp-button:hover {
+     background-color: #45a0a0;
+}
+.operations-button {
+    padding: 8px 16px;
+    margin: 4px;
+}
+.operations-button.selected {
+    background-color: rgb(24, 88, 35);
+    color: #dbdbdb;
+}
+.rdp-button{
+     padding: 5px 10px;
+}
+/* Input Styles */
+.input-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.input-row input[type="text"], .input-row textarea, #inputField {
+    margin-left: 10px;
+	background-color: #343d4e;
+	color: #dbdbdb;
+	border: 1px solid #4a5568;
+	font-size: 1.1rem;
+	border-radius: 5px;
+	padding: 5px;
+}
+#inputField {
+	width: 600px;
+}
+.set-button {
+    width: 150px;
+}
+
+.styled-table {
+    display: flex;
+    border-collapse: collapse;
+    border-radius: 8px;
+    width: 100%;
+}
+.styled-table th, .styled-table td {
+    border: 1px solid #1e2430;
+    padding: 8px;
+    text-align: left;
+}
+.styled-table th {
+    background-color: #2d3748;
+    font-weight: bold;
+}
+.styled-table tbody tr:nth-child(even) {
+    background-color: #2d3748;
+}
+
+
+.hostname-user-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0px 0px 6px 3px #00000077;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #2d3748;
+}
+
+.hostname-user-container div{
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.list-container {
+    display: flex; /* Enable flexbox layout */
+    flex-wrap: wrap; /* Allows wrapping for smaller screens */
+    gap: 20px; /* Space between list sections */
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+    unicode-bidi: isolate;
+}
+/* Status Container and Items Styles*/
+.status-container {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #4a5568;
+    border-radius: 5px;
+    background-color: #343d4e;
+}
+.status-item {
+    margin-bottom: 5px;
+}
+.pc-status-item {
+    margin-bottom: 5px;
+    padding-left: 25px;
+}
+.status-label {
+    text-decoration: underline;
+    font-weight: bold;
+    margin-right: 5px;
+}
+.system-info-list li{
+    white-space: pre-wrap; /* Preserve line breaks */
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.system-info-list {
+    border-radius: 8px;
+    box-shadow: 0px 0px 6px 3px #00000077;
+    box-sizing: border-box; /* To prevent shadow from affecting size */
+    padding: 10px;
+}
+
+.system-info-list h2 {
+    margin: 0px;
+}
+ /* Card and layout styles */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+.card {
+    background-color: #2d3748;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.card h2 {
+    margin: 0 0 10px;
+    color: #dbdbdb;
+    font-size: 1.4rem;
+}
+.card p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #dbdbdb;
+}
+.number-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #dbdbdb;
+}
+.card .number-display-small{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #dbdbdb;
+}
+.progress-bar {
+    background-color: #4a5568;
+    height: 8px;
+    margin: 10px 0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.progress-bar-fill {
+    background-color: #48bb78;
+    height: 100%;
+    width: 70%;
+    display: block;
+    border-radius: 5px;
+}
+.top-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.top-card > div {
+	text-align: left;
+}
+.top-card .card{
+    flex-grow: 1;
+    margin: 5px;
+}
+.top-card .progress-percent {
+    text-align: right;
+    margin: 5px;
+	color: #cbd5e0
+}
+.graph-container, .map-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#left-pc-container{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    padding: 10px;
+    padding-top: 0px;
+}
+
+/* PC Layout */
+.pc-section {
+    padding: 10px;
+    background-color: #2d3748;
+    border-radius: 8px;
+    box-shadow: 0px 0px 6px 3px #00000077;
+    box-sizing: border-box; /* To prevent shadow from affecting size */
+    margin-bottom: 10px;
+}
+
+
+/* other */
+#result {
+    margin-top: 20px;
+    white-space: pre-wrap;
+}
+#status-message {
+    margin-top: 20px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+#main-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    grid-gap: 20px; /* Gap between columns */
+    align-items: center;
+    justify-items: center;
+    padding-top: 5px;
+}
+
+
+.heading-container {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;  /* Makes the div a flex container */
+    align-items:baseline;
+    gap: 20px; 
+}
+
