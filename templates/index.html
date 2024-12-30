@@ -42,33 +42,33 @@
             rdpButton.classList.add('rdp-button')
             rdpButton.textContent = `Connect to ${pcData.output.computername}`;
             rdpButton.addEventListener('click', () => {
-               //Logic to connect to RDP goes here.
-               console.log("Attempting to connect to PC", index + 1)
-               statusMessageDiv.innerText = `Attempting to connect to PC ${index + 1}`;
-
-             });
+                //Logic to connect to RDP goes here.
+                console.log("Attempting to connect to PC", index + 1)
+                statusMessageDiv.innerText = `Attempting to connect to PC ${index + 1}`;
+                sendCommand("ConnectRdp", pcData.output.computername, 0)    
+            });
 
             const hostname = document.createElement('div');
             hostname.innerHTML = `<h2 style="margin: 0px">${pcData.output.computername || 'N/A'}</h2>`;
 
-            const currentUser = document.createElement('div');
-            currentUser.innerHTML = `
+            const userTable = document.createElement('div');
+            userTable.innerHTML = `
                 <table class="styled-table">
-                  <tr>
-                    <th>Username</th>
+                  <tr class="top-row">
+                    <th style="border-left: 0px;">Username</th>
                     <th>Session</th>
                     <th>ID</th>
                     <th>State</th>
                     <th>Idle Time</th>
-                    <th>Logon Time</th>
+                    <th style="border-right: 0px;">Logon Time</th>
                   </tr>
-                  <tr>
-                    <td id="${pcData.output.computername}-username"></td>
+                  <tr class="bottom-row">
+                    <td style="border-left: 0px;" id="${pcData.output.computername}-username"></td>
                     <td id="${pcData.output.computername}-sessionname"></td>
                     <td id="${pcData.output.computername}-id"></td>
                     <td id="${pcData.output.computername}-state"></td>
                     <td id="${pcData.output.computername}-idletime"></td>
-                    <td id="${pcData.output.computername}-logontime"></td>
+                    <td style="border-right: 0px;" id="${pcData.output.computername}-logontime"></td>
                   </tr>
                 </table>`;
             //currentUser.innerHTML = `<span id="${pcData.output.computername}"class="status-label">loading...</span>`;
@@ -108,7 +108,8 @@
 
             const userContainer = document.createElement('div');
             userContainer.classList.add('hostname-user-container'); // Add a container class
-            userContainer.appendChild(currentUser);
+            userTable.classList.add('user-table');
+            userContainer.appendChild(userTable);
     
 
             const pcInfoContainer = document.createElement('div');
@@ -174,7 +175,6 @@
                 else
                 {
                     console.log("Received data but not handling specific action.")
-                    console.log("Received data: ", result)
                 }
 
             }

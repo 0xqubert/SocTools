@@ -1,0 +1,164 @@
+<!--logs.html-->
+{% extends "base.html" %}
+{% block title %}Logs{% endblock %}
+{% block content %}
+    <div class="heading-container">
+        <h1>Logs</h1>
+        <h4 id="status-message"></h4>
+    </div>
+    <div id="loading" style="display: none;">Loading...</div>
+    <div id="main-container">
+        <h1>Text File Content</h1>
+        <pre id="text-content"></pre>
+        <button onclick="fetchText()">Fetch Text</button>
+        <div id="left-pc-container"></div>
+            <div class="refresh-dropdown">
+                <label for="refreshInterval">Refresh Interval:</label>
+                <select id="refreshInterval" class="refresh-interval-select">
+                    <option value="-1">Off</option>
+                    <option value="5">5 Seconds</option>
+                    <option value="10">10 Seconds</option>
+                    <option value="30">30 Seconds</option>
+                    <option value="60">1 Minute</option>
+                    <option value="120">2 Minutes</option>
+                    <option value="300">5 Minutes</option>
+                </select>
+            </div>
+     </div>
+
+	<script>
+        const menuButtons = document.querySelectorAll(".menu-button");
+        const resultDiv = document.getElementById("result");
+		const loadingDiv = document.getElementById("loading");
+        const HostnameDisplay = document.getElementById("HostnameDisplay");
+        const UsertableDisplay = document.getElementById("UsertableDisplay");
+		const statusMessageDiv = document.getElementById("status-message");
+        const leftPcContainer = document.getElementById("left-pc-container");
+        let eventSource = null;
+
+
+
+
+        async function fetchText() {
+            try {
+                const response = await fetch('/logs');
+                if (!response.ok) {
+                     throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                document.getElementById('text-content').innerText = data.content;
+            } catch (error) {
+                document.getElementById('text-content').innerText = 'Error fetching text:' + error;
+            }
+        }
+
+
+
+
+        async function sendCommand(action, input, index) {
+            loadingDiv.style.display = "block";
+			statusMessageDiv.innerText = `Sending command from index.html: ${action}...`;
+              const body = {
+                    "action": action,
+                };
+            if(input)
+            {
+                body.input = input;
+            }
+            try {
+                const response = await fetch('/events', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body),
+                });
+                if (!response.ok) {
+                    statusMessageDiv.innerText = `Error: Command: ${action} failed.`;
+                    loadingDiv.style.display = "none";
+                    const err = await response.json();
+                    throw new Error(err.error)
+                }
+
+                loadingDiv.style.display = "none";
+                const result = await response.json();
+				statusMessageDiv.innerText = `Command: ${action} completed successfully.`;
+                console.log("Received data: ", result)
+                if(result && result.action)
+                {
+                    
+                }
+                else
+                {
+                    console.log("Received data but not handling specific action.")
+                }
+
+            }
+            catch(error){
+                statusMessageDiv.innerText = `Command: ${action} had an error: ${error.message}`;
+                loadingDiv.style.display = "none";
+                console.error("Error:", error.message);
+            }
+        }
+        function setupSSE() {
+            console.log("setupSSE started"); // Log before creating the event source
+            eventSource = new EventSource("/events");
+
+            eventSource.onopen = function() {
+                console.log("SSE connection opened."); // Log when connection opens
+            }
+            eventSource.onmessage = function(event) {
+                if (!event.data || typeof event.data !== 'string') {
+                    console.warn("Invalid event data:", event.data);
+                    return;
+                }
+                try {
+                    const result = JSON.parse(event.data);
+                    console.log("Parsed SSE data:", result);
+                } catch (error) {
+                    console.error("Error parsing SSE data:", error);
+                    console.error("SSE Event Data:", event.data);
+                    console.error("Error Type:", error.name);
+                    console.error("Error Message:", error.message);
+                }
+            };
+            eventSource.onerror = function(error) {
+                console.error("SSE error:", error);
+            };
+        }
+
+
+		window.addEventListener('load', function() {
+            console.log("window load event started");
+        	setupSSE();
+			loadingDiv.style.display = "none"; //hide the loading div on first load
+            console.log("window load event finished");
+        });
+
+
+        // Get a reference to the select dropdown element
+        const refreshIntervalSelect = document.getElementById('refreshInterval');
+
+        // Attach an event listener to detect when the user makes a selection.
+        refreshIntervalSelect.addEventListener('change', function() {
+        // retrieve the value
+            const selectedInterval = parseInt(refreshIntervalSelect.value);
+            console.log('Selected Refresh Interval:', selectedInterval);
+            action = "changeRefreshInterval"
+            sendCommand(action, selectedInterval, 0)
+        });
+        
+
+        window.addEventListener('beforeunload', function() {
+            if (eventSource) {
+                eventSource.close();
+            }
+        });
+        menuButtons.forEach(button => {
+            button.addEventListener("click", function(){
+                const action = this.getAttribute('data-action');
+                sendCommand(action, null, 0);
+            });
+        });
+    </script>
+{% endblock %}

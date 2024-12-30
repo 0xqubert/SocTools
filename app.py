@@ -1,4 +1,4 @@
-from flask import Flask, Response, jsonify, render_template, request
+from flask import Flask, Response, jsonify, make_response, render_template, request
 import threading
 import datetime
 import socket
@@ -136,8 +136,26 @@ socket_client = SocketClient(host, port)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    # Get the current time
+    current_timestamp = time.time()
+    # Prepare the response and cache control headers
+    response = make_response(render_template("index.html", current_time=current_timestamp))
+    # Set cache control headers to prevent caching
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 
+@app.route('/logs')
+def get_text_content():
+    logFile = "logs/SocTools.log"
+    try:
+        with open(logFile, 'r') as f:
+            text_content = f.read()
+    except FileNotFoundError:
+        text_content = "File Not Found"
+    response = make_response(render_template("logs.html", content=text_content))
+    return response
 
 @app.route('/harddelete')
 def hard_delete():
@@ -178,7 +196,7 @@ def events():
             else:
                 log_write(f"Sending Command: {command}")
                 result = socket_client.send_command(json.dumps(command))
-                log_write(f"Received from powershell before processing: {result}")# Added logging here.
+                log_write(f"Response received: {result}")# Added logging here.
                 sse_queue.put(result) # add the result to the queue, so that the events are sent
             return jsonify(result)
         else:

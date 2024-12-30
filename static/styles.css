@@ -183,20 +183,31 @@ body {
 }
 
 .styled-table {
-    display: flex;
-    border-collapse: collapse;
-    border-radius: 8px;
-    width: 100%;
+    border-collapse: collapse; /* Crucial for collapsing borders */
+    width:100%;
 }
-.styled-table th, .styled-table td {
-    border: 1px solid #1e2430;
+
+.styled-table th,
+.styled-table td {
+    border: 2px solid #1e2430; /* Border on all sides of the cells */
     padding: 8px;
     text-align: left;
+    border-radius: 8px;
 }
+/*optional styling for headers*/
 .styled-table th {
     background-color: #2d3748;
     font-weight: bold;
 }
+
+.styled-table th, .top-row {
+    border-top: 0px;
+}
+
+.styled-table td, .bottom-row {
+    border-bottom: 0px;
+}
+
 .styled-table tbody tr:nth-child(even) {
     background-color: #2d3748;
 }
@@ -209,21 +220,22 @@ body {
     border-radius: 8px;
     box-shadow: 0px 0px 6px 3px #00000077;
     box-sizing: border-box;
-    padding: 10px;
     margin-bottom: 10px;
     background-color: #2d3748;
 }
 
-.hostname-user-container div{
-    display: flex; /* Enable Flexbox */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+.user-table {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    border-radius: 8px;
 }
+
 
 .list-container {
     display: flex; /* Enable flexbox layout */
     flex-wrap: wrap; /* Allows wrapping for smaller screens */
-    gap: 20px; /* Space between list sections */
+    gap: 10px; /* Space between list sections */
 }
 
 ul {
@@ -234,6 +246,8 @@ ul {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     padding-inline-start: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     unicode-bidi: isolate;
 }
 /* Status Container and Items Styles*/

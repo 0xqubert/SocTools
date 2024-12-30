@@ -200,13 +200,13 @@ function GetSocPcInfo($result){
             "visualstudio" = $($softwareResultsList["Visual Studio Code"])
         }
         $response = [ResponseObject]::new()
-        $response.action = "GetSocPcInfo"
+        $response.action = $($MyInvocation.MyCommand.Name)
         $response.success = $true
         $response.output = $output
         return $response | ConvertTo-Json
     }
     catch{
-        return Write-ErrorResponse -FunctionName "GetSocPcInfo" -Exception $_.Exception
+        return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_.Exception
     }
 
 }
@@ -255,14 +255,30 @@ function GetCurrentUserInfo($result){
             "table" =  $fullstring
         }
         $response = [ResponseObject]::new()
-        $response.action = "GetCurrentUserInfo"
+        $response.action = $($MyInvocation.MyCommand.Name)
         $response.success = $true
         $response.output = $output
         return $response | ConvertTo-Json
     }catch{
-        return Write-ErrorResponse -FunctionName "GetCurrentUserInfo" -Exception $_.Exception
+        return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_.Exception
     }
-    
+}
+
+function ConnectRdp($result){
+    $system = $result.input
+    try{
+        Start-Process "$env:windir\system32\mstsc.exe" -ArgumentList "/v:$system"
+        $output = @{
+            "message" =  "Started new rpd process"
+        }
+        $response = [ResponseObject]::new()
+        $response.action = $($MyInvocation.MyCommand.Name)
+        $response.success = $true
+        $response.output = $output
+        return $response | ConvertTo-Json
+    }catch{
+        return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_.Exception
+    }
 }
 
 function RevokeMessage($userInput){
@@ -290,9 +306,8 @@ function RevokeMessage($userInput){
        }
 	}
 	catch{
-		return Write-ErrorResponse -FunctionName "RevokeMessage" -Exception $_.Exception
+		return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_.Exception
 	}
-    LogWrite -logMessage "Finished RevokeMessage function."
 }
 
 function SetSearchName($searchName){
