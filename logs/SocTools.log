@@ -3946,3 +3946,302 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 2025-01-01 14:55:15 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
 2025-01-01 14:55:15 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
 2025-01-01 14:55:15 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '1/1/2025 12:44 PM', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 14:55:42 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 15:00:42 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 15:05:42 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 15:07:35 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 15:07:35 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 15:07:35 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 15:07:35 - SocTools.ps1:   Gathering system information...
+2025-01-01 15:07:35 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 15:07:35 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 15:07:36 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 15:07:37 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 15:07:37 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.58, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 15:07:37 -       app.py: Generator Exited
+2025-01-01 15:07:37 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 15:07:37 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 15:07:37 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 15:07:37 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '1/1/2025 12:44 PM', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 15:10:42 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 15:15:42 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 15:20:42 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 15:25:42 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 15:30:42 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 15:35:43 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 15:38:04 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:38:04 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 15:38:04 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:38:04 - SocTools.ps1: SocTools.ps1 started. Process ID: 10876
+2025-01-01 15:38:04 - SocTools.ps1: app.py started. Process ID: 32440
+2025-01-01 15:38:04 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 15:38:04 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 15:38:04 -       app.py: Connected Established!
+2025-01-01 15:38:04 -       app.py: app.py(127.0.0.1:55358) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 15:38:04 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:55358
+2025-01-01 15:38:04 - SocTools.ps1: Connection Established!
+2025-01-01 15:38:04 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:55358)
+2025-01-01 15:38:04 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:38:04 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 15:38:04 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:38:12 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 15:38:12 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 15:38:12 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 15:38:12 - SocTools.ps1:   Gathering system information...
+2025-01-01 15:38:12 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 15:38:12 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 15:38:14 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 15:38:15 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 15:38:41 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 15:38:41 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 15:38:41 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 15:38:41 - SocTools.ps1:   Gathering system information...
+2025-01-01 15:38:41 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 15:38:41 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 15:38:42 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 15:38:43 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 15:38:50 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 15:38:50 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 15:38:50 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 15:38:50 - SocTools.ps1:   Gathering system information...
+2025-01-01 15:38:50 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 15:38:50 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 15:38:51 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 15:38:52 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 15:39:32 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 15:39:32 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 15:39:32 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 15:39:32 - SocTools.ps1:   Gathering system information...
+2025-01-01 15:39:32 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 15:39:32 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 15:39:33 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 15:39:34 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 15:39:53 -       app.py: Error sending command to powershell: [WinError 10054] An existing connection was forcibly closed by the remote host
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 66, in send_command
+    chunk = self.socket.recv(4096)
+            ^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+2025-01-01 15:39:53 -       app.py: Error sending command to powershell: [WinError 10054] An existing connection was forcibly closed by the remote host
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 66, in send_command
+    chunk = self.socket.recv(4096)
+            ^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+2025-01-01 15:39:53 -       app.py: Response received: None
+2025-01-01 15:39:53 -       app.py: Error sending command to powershell: [WinError 10054] An existing connection was forcibly closed by the remote host
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 66, in send_command
+    chunk = self.socket.recv(4096)
+            ^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+2025-01-01 15:39:54 -       app.py: Error sending command to powershell: [WinError 10054] An existing connection was forcibly closed by the remote host
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 66, in send_command
+    chunk = self.socket.recv(4096)
+            ^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+2025-01-01 15:39:54 -       app.py: Response received: None
+2025-01-01 15:39:54 -       app.py: Generator Exited
+2025-01-01 15:39:54 -       app.py: Response received: None
+2025-01-01 15:39:54 -       app.py: Generator Exited
+2025-01-01 15:39:54 -       app.py: Generator Exited
+2025-01-01 15:39:54 -       app.py: Generator Exited
+2025-01-01 15:39:57 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:39:57 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 15:39:57 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:39:57 - SocTools.ps1: SocTools.ps1 started. Process ID: 26460
+2025-01-01 15:39:57 - SocTools.ps1: app.py started. Process ID: 36668
+2025-01-01 15:39:57 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 15:39:58 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 15:39:58 -       app.py: Connected Established!
+2025-01-01 15:39:58 -       app.py: app.py(127.0.0.1:49529) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 15:39:58 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:49529
+2025-01-01 15:39:58 - SocTools.ps1: Connection Established!
+2025-01-01 15:39:58 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:49529)
+2025-01-01 15:39:58 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:39:58 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 15:39:58 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:40:10 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 15:40:11 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 15:40:11 - SocTools.ps1:   Gathering system information...
+2025-01-01 15:40:11 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 15:40:11 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 15:40:13 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 15:40:14 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 15:41:24 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:41:24 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 15:41:24 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:41:24 - SocTools.ps1: SocTools.ps1 started. Process ID: 19760
+2025-01-01 15:41:24 - SocTools.ps1: app.py started. Process ID: 35696
+2025-01-01 15:41:24 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 15:41:25 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 15:41:25 -       app.py: Connected Established!
+2025-01-01 15:41:25 -       app.py: app.py(127.0.0.1:55902) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 15:41:25 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:55902
+2025-01-01 15:41:25 - SocTools.ps1: Connection Established!
+2025-01-01 15:41:25 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:55902)
+2025-01-01 15:41:25 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:41:25 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 15:41:25 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:41:30 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 15:41:31 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 15:41:31 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 15:41:31 - SocTools.ps1:   Gathering system information...
+2025-01-01 15:41:31 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 15:41:31 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 15:41:33 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 15:41:34 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 15:42:02 -       app.py: Error sending command to powershell: [WinError 10054] An existing connection was forcibly closed by the remote host
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 66, in send_command
+    chunk = self.socket.recv(4096)
+              ^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+2025-01-01 15:42:02 -       app.py: Response received: None
+2025-01-01 15:42:05 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:42:05 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 15:42:05 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:42:05 - SocTools.ps1: SocTools.ps1 started. Process ID: 8312
+2025-01-01 15:42:05 - SocTools.ps1: app.py started. Process ID: 34280
+2025-01-01 15:42:05 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 15:42:06 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 15:42:06 -       app.py: Connected Established!
+2025-01-01 15:42:06 -       app.py: app.py(127.0.0.1:60734) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 15:42:06 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:60734
+2025-01-01 15:42:06 - SocTools.ps1: Connection Established!
+2025-01-01 15:42:06 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:60734)
+2025-01-01 15:42:06 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:42:06 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 15:42:06 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:42:20 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 15:42:20 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 15:42:20 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 15:42:20 - SocTools.ps1:   Gathering system information...
+2025-01-01 15:42:20 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 15:42:20 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 15:42:22 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 15:42:23 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 15:43:00 -       app.py: Error sending command to powershell: [WinError 10054] An existing connection was forcibly closed by the remote host
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 66, in send_command
+    chunk = self.socket.recv(4096)
+          ^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+2025-01-01 15:43:00 -       app.py: Response received: None
+2025-01-01 15:43:01 -       app.py: Generator Exited
+2025-01-01 15:43:03 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:43:03 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 15:43:03 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:43:04 - SocTools.ps1: SocTools.ps1 started. Process ID: 32380
+2025-01-01 15:43:04 - SocTools.ps1: app.py started. Process ID: 21932
+2025-01-01 15:43:04 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 15:43:04 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 15:43:04 -       app.py: Connected Established!
+2025-01-01 15:43:04 -       app.py: app.py(127.0.0.1:55348) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 15:43:04 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:55348
+2025-01-01 15:43:04 - SocTools.ps1: Connection Established!
+2025-01-01 15:43:04 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:55348)
+2025-01-01 15:43:04 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:43:04 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 15:43:04 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 15:43:18 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 15:43:19 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 15:43:19 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 15:43:19 - SocTools.ps1:   Gathering system information...
+2025-01-01 15:43:19 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 15:43:19 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 15:43:21 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 15:43:22 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 15:43:22 -       app.py: Debug: Raw data received: {
+    "action":  "GetSocPcInfo",
+    "success":  true,
+    "output":  {
+                   "DESKTOP-JUJ4D1S":  {
+                                           "lastreboot":  "\/Date(1735764232500)\/",
+                                           "computername":  "DESKTOP-JUJ4D1S",
+                                           "manufacturer":  "ASUS",
+                                           "ciscoanyconnect":  null,
+                                           "forcepoint":  null,
+                                           "currentuser":  "Scott",
+                                           "drive":  "G: Google Drive",
+                                           "zscaler":  null,
+                                           "pingresult":  null,
+                                           "freespace":  208.55,
+                                           "crowdstrike":  null,
+                                           "model":  "System Product Name",
+                                           "visualstudio":  "Microsoft Visual Studio Code (User) - Version: 1.96.2",
+                                           "memory":  63.75,
+                                           "os":  null,
+                                           "drivesize":  930.65
+                                       }
+               }
+}__END__
+
+2025-01-01 15:43:22 -       app.py: Debug: data_str before json.loads: {
+    "action":  "GetSocPcInfo",
+    "success":  true,
+    "output":  {
+                   "DESKTOP-JUJ4D1S":  {
+                                           "lastreboot":  "\/Date(1735764232500)\/",
+                                           "computername":  "DESKTOP-JUJ4D1S",
+                                           "manufacturer":  "ASUS",
+                                           "ciscoanyconnect":  null,
+                                           "forcepoint":  null,
+                                           "currentuser":  "Scott",
+                                           "drive":  "G: Google Drive",
+                                           "zscaler":  null,
+                                           "pingresult":  null,
+                                           "freespace":  208.55,
+                                           "crowdstrike":  null,
+                                           "model":  "System Product Name",
+                                           "visualstudio":  "Microsoft Visual Studio Code (User) - Version: 1.96.2",
+                                           "memory":  63.75,
+                                           "os":  null,
+                                           "drivesize":  930.65
+                                       }
+               }
+}
+2025-01-01 15:43:22 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.55, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 15:43:22 -       app.py: Generator Exited
+2025-01-01 15:43:22 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 15:43:22 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 15:43:22 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 15:43:23 -       app.py: Debug: Raw data received: {
+    "action":  "GetCurrentUserInfo",
+    "success":  true,
+    "output":  {
+                   "DESKTOP-JUJ4D1S":  {
+                                           "username":  "scott",
+                                           "sessionname":  "console",
+                                           "id":  "1",
+                                           "logontime":  "1/1/2025 12:44 PM",
+                                           "idletime":  "none",
+                                           "computer":  "DESKTOP-JUJ4D1S",
+                                           "state":  "Active"
+                                       }
+               }
+}__END__
+
+2025-01-01 15:43:23 -       app.py: Debug: data_str before json.loads: {
+    "action":  "GetCurrentUserInfo",
+    "success":  true,
+    "output":  {
+                   "DESKTOP-JUJ4D1S":  {
+                                           "username":  "scott",
+                                           "sessionname":  "console",
+                                           "id":  "1",
+                                           "logontime":  "1/1/2025 12:44 PM",
+                                           "idletime":  "none",
+                                           "computer":  "DESKTOP-JUJ4D1S",
+                                           "state":  "Active"
+                                       }
+               }
+}
+2025-01-01 15:43:23 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '1/1/2025 12:44 PM', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}

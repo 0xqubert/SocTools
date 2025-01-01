@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 host = '127.0.0.1'
 port = 65432
-delimiter = "__END_OF_RESPONSE__"
+delimiter = "__END__"
 sse_queue = queue.Queue() # Create a new Queue to pass data to sse.
 
 def log_write(log_message):
@@ -57,26 +57,30 @@ class SocketClient:
 
     def send_command(self, command):
         try:
-          if(self.socket == None or self.socket.fileno() == -1):
-             log_write("Reconnecting due to closed socket.")
-             self.connect()
-          self.socket.sendall((command + '\n').encode('utf-8'))
-          data = b""
-          while True:
-              chunk = self.socket.recv(4096)
-              if not chunk:
-                break
-              data += chunk
-              if delimiter.encode('utf-8') in data:
-                break
-          data_str = data.decode('utf-8', 'ignore')
-          data_str = data_str.split(delimiter)[0] # Remove the delimiter before parsing the json
-          result = json.loads(data_str.strip())
-          return result
+            if(self.socket == None or self.socket.fileno() == -1):
+                log_write("Reconnecting due to closed socket.")
+                self.connect()
+            self.socket.sendall((command + '\n').encode('utf-8'))
+            data = b""
+            while True:
+                chunk = self.socket.recv(4096)
+                if not chunk:
+                    break
+                data += chunk
+                if delimiter.encode('utf-8') in data:
+                    break
+            data_str = data.decode('utf-8', 'ignore')
+            log_write(f"Debug: Raw data received: {data_str}")
+            if delimiter in data_str:
+                data_str = data_str.split(delimiter)[0]
+            data_str = data_str.strip()
+            log_write(f"Debug: data_str before json.loads: {data_str}")
+            result = json.loads(data_str)
+            return result
 
         except Exception as e:
-           log_write(f"Error sending command to powershell: {e}\n {traceback.format_exc()}")
-           return None
+            log_write(f"Error sending command to powershell: {e}\n {traceback.format_exc()}")
+            return None
 
     def close(self):
         if self.socket:
@@ -115,6 +119,7 @@ class SocketClient:
               self.send_command(json.dumps({"action": "keepalive"}))
           except Exception as e:
               log_write(f"Error sending keep alive: {e}\n {traceback.format_exc()}")
+
 # Instantiate the socket client at app startup
 socket_client = SocketClient(host, port)
 

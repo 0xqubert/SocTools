@@ -7,7 +7,7 @@ $hostname = '127.0.0.1'
 $port = 65432
 $appProcess = $null
 $logFile = "logs\SocTools.log"  #Change this to your desired log path
-$delimiter = "__END_OF_RESPONSE__"
+$delimiter = "__END__"
 $computerList = @(
             "DESKTOP-JUJ4D1S"#,
             #"DESKTOP-B1N8PA8"
