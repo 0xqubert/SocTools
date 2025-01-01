@@ -3430,3 +3430,519 @@ ConnectionRefusedError: [WinError 10061] No connection could be made because the
 2024-12-31 23:10:16 - SocTools.ps1: -------------------------------------------------------------
 2024-12-31 23:10:16 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
 2024-12-31 23:10:16 - SocTools.ps1: -------------------------------------------------------------
+2024-12-31 23:33:38 - SocTools.ps1: -------------------------------------------------------------
+2024-12-31 23:33:38 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2024-12-31 23:33:38 - SocTools.ps1: -------------------------------------------------------------
+2024-12-31 23:33:38 - SocTools.ps1: SocTools.ps1 started. Process ID: 24672
+2024-12-31 23:33:38 - SocTools.ps1: app.py started. Process ID: 19116
+2024-12-31 23:33:38 - SocTools.ps1: Listening on 127.0.0.1:65432
+2024-12-31 23:33:38 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2024-12-31 23:33:38 -       app.py: Connected Established!
+2024-12-31 23:33:38 -       app.py: app.py(127.0.0.1:61209) <---> SocTools.ps1(127.0.0.1:65432)
+2024-12-31 23:33:38 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:61209
+2024-12-31 23:33:38 - SocTools.ps1: Connection Established!
+2024-12-31 23:33:38 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:61209)
+2024-12-31 23:33:38 - SocTools.ps1: -------------------------------------------------------------
+2024-12-31 23:33:38 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2024-12-31 23:33:38 - SocTools.ps1: -------------------------------------------------------------
+2024-12-31 23:33:44 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2024-12-31 23:33:44 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2024-12-31 23:33:44 - SocTools.ps1: Computer sys54618 is reachable.
+2024-12-31 23:33:44 - SocTools.ps1:   Gathering system information...
+2024-12-31 23:33:50 - SocTools.ps1: Error response generated: Cannot process argument transformation on parameter 'Exception'. Cannot convert the "The RPC server is unavailable.
+" value of type "System.Management.Automation.ErrorRecord" to type "System.Exception".
+2024-12-31 23:33:50 -       app.py: Error sending command to powershell: Expecting value: line 1 column 1 (char 0)
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 74, in send_command
+    result = json.loads(data_str.strip())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "json\__init__.py", line 346, in loads
+  File "json\decoder.py", line 337, in decode
+  File "json\decoder.py", line 355, in raw_decode
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2024-12-31 23:33:50 -       app.py: Response received: None
+2024-12-31 23:38:39 - SocTools.ps1: Command received: {"action": "keepalive"}
+2024-12-31 23:43:39 - SocTools.ps1: Command received: {"action": "keepalive"}
+2024-12-31 23:48:39 - SocTools.ps1: Command received: {"action": "keepalive"}
+2024-12-31 23:53:39 - SocTools.ps1: Command received: {"action": "keepalive"}
+2024-12-31 23:58:39 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 00:03:39 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 00:08:39 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 00:13:39 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 00:18:39 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 00:23:39 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 00:28:39 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 00:33:39 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 00:38:40 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 12:52:42 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 12:52:43 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 12:52:43 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 12:52:43 - SocTools.ps1: SocTools.ps1 started. Process ID: 34832
+2025-01-01 12:52:43 - SocTools.ps1: app.py started. Process ID: 35528
+2025-01-01 12:52:43 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 12:52:44 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 12:52:44 -       app.py: Connected Established!
+2025-01-01 12:52:44 -       app.py: app.py(127.0.0.1:64296) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 12:52:44 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:64296
+2025-01-01 12:52:44 - SocTools.ps1: Connection Established!
+2025-01-01 12:52:44 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:64296)
+2025-01-01 12:52:44 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 12:52:44 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 12:52:44 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 12:52:57 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 12:52:57 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 12:52:57 - SocTools.ps1: Computer sys54618 is reachable.
+2025-01-01 12:52:57 - SocTools.ps1:   Gathering system information...
+2025-01-01 12:53:02 - SocTools.ps1:     Error: Could not retrieve Win32_ComputerSystem data.
+2025-01-01 12:53:02 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 12:53:08 - SocTools.ps1:     Error: Could not retrieve Win32_LogicalDisk data.
+2025-01-01 12:53:08 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 12:53:10 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 12:53:11 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 12:53:11 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'sys54618': {'lastreboot': '/Date(1735764232500)/', 'computername': None, 'manufacturer': None, 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': None, 'drive': None, 'zscaler': None, 'pingresult': None, 'freespace': None, 'crowdstrike': None, 'model': None, 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': None, 'os': None, 'drivesize': None}}}
+2025-01-01 12:53:11 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 12:53:12 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 12:53:12 - SocTools.ps1: Getting logged in user for sys54618 :
+2025-01-01 12:53:14 - SocTools.ps1:     Error: sys54618 is unreachable
+2025-01-01 12:53:14 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'table': ['']}}
+2025-01-01 12:53:35 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 12:53:35 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 12:53:35 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 12:53:36 - SocTools.ps1: SocTools.ps1 started. Process ID: 37656
+2025-01-01 12:53:36 - SocTools.ps1: app.py started. Process ID: 37168
+2025-01-01 12:53:36 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 12:53:36 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 12:53:36 -       app.py: Connected Established!
+2025-01-01 12:53:36 -       app.py: app.py(127.0.0.1:50500) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 12:53:36 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:50500
+2025-01-01 12:53:36 - SocTools.ps1: Connection Established!
+2025-01-01 12:53:36 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:50500)
+2025-01-01 12:53:36 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 12:53:36 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 12:53:36 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 12:54:03 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 12:54:03 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 12:54:03 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 12:54:03 - SocTools.ps1:   Gathering system information...
+2025-01-01 12:54:03 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 12:54:03 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 12:54:05 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 12:54:06 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 12:54:06 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.61, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 12:54:06 -       app.py: Generator Exited
+2025-01-01 12:54:06 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 12:54:06 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 12:54:06 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 12:54:06 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'table': ['DESKTOP-JUJ4D1S', 'scott', 'console', '1', 'Active', 'none', '1/1/2025', '12:44', 'PM']}}
+2025-01-01 12:57:49 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 12:57:49 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 12:57:49 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 12:57:49 - SocTools.ps1: SocTools.ps1 started. Process ID: 34412
+2025-01-01 12:57:49 - SocTools.ps1: app.py started. Process ID: 33836
+2025-01-01 12:57:49 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 12:57:49 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 12:57:49 -       app.py: Connected Established!
+2025-01-01 12:57:49 -       app.py: app.py(127.0.0.1:57594) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 12:57:49 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:57594
+2025-01-01 12:57:49 - SocTools.ps1: Connection Established!
+2025-01-01 12:57:49 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:57594)
+2025-01-01 12:57:49 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 12:57:49 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 12:57:49 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 12:58:10 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 12:58:10 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 12:58:10 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 12:58:10 - SocTools.ps1:   Gathering system information...
+2025-01-01 12:58:10 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 12:58:10 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 12:58:13 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 12:58:13 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 12:58:14 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.61, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 12:58:14 -       app.py: Generator Exited
+2025-01-01 12:58:14 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 12:58:14 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 12:58:14 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 12:58:14 - SocTools.ps1: Error response generated: Cannot process argument transformation on parameter 'Exception'. Cannot convert the "Cannot index into a null array." value of type "System.Management.Automation.ErrorRecord" to type "System.Exception".
+2025-01-01 12:58:14 -       app.py: Error sending command to powershell: Expecting value: line 1 column 1 (char 0)
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 74, in send_command
+    result = json.loads(data_str.strip())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "json\__init__.py", line 346, in loads
+  File "json\decoder.py", line 337, in decode
+  File "json\decoder.py", line 355, in raw_decode
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2025-01-01 12:58:14 -       app.py: Response received: None
+2025-01-01 12:58:21 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 12:58:21 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 12:58:21 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 12:58:21 - SocTools.ps1:   Gathering system information...
+2025-01-01 12:58:21 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 12:58:21 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 12:58:22 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 12:58:23 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 12:58:23 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.61, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 12:58:23 -       app.py: Generator Exited
+2025-01-01 12:58:23 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 12:58:23 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 12:58:23 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 12:58:23 - SocTools.ps1: Error response generated: Cannot process argument transformation on parameter 'Exception'. Cannot convert the "Cannot index into a null array." value of type "System.Management.Automation.ErrorRecord" to type "System.Exception".
+2025-01-01 12:58:23 -       app.py: Error sending command to powershell: Expecting value: line 1 column 1 (char 0)
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 74, in send_command
+    result = json.loads(data_str.strip())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "json\__init__.py", line 346, in loads
+  File "json\decoder.py", line 337, in decode
+  File "json\decoder.py", line 355, in raw_decode
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2025-01-01 12:58:24 -       app.py: Response received: None
+2025-01-01 13:00:28 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 13:00:28 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 13:00:28 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 13:00:28 - SocTools.ps1:   Gathering system information...
+2025-01-01 13:00:28 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 13:00:28 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 13:00:30 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 13:00:30 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 13:00:30 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.6, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 13:00:31 -       app.py: Generator Exited
+2025-01-01 13:00:31 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 13:00:31 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:00:31 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:00:31 - SocTools.ps1: Error response generated: Cannot process argument transformation on parameter 'Exception'. Cannot convert the "Cannot index into a null array." value of type "System.Management.Automation.ErrorRecord" to type "System.Exception".
+2025-01-01 13:00:31 -       app.py: Error sending command to powershell: Expecting value: line 1 column 1 (char 0)
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 74, in send_command
+    result = json.loads(data_str.strip())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "json\__init__.py", line 346, in loads
+  File "json\decoder.py", line 337, in decode
+  File "json\decoder.py", line 355, in raw_decode
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+2025-01-01 13:00:31 -       app.py: Response received: None
+2025-01-01 13:01:42 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:01:42 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 13:01:42 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:01:42 - SocTools.ps1: SocTools.ps1 started. Process ID: 35408
+2025-01-01 13:01:42 - SocTools.ps1: app.py started. Process ID: 25964
+2025-01-01 13:01:42 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 13:01:43 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 13:01:43 -       app.py: Connected Established!
+2025-01-01 13:01:43 -       app.py: app.py(127.0.0.1:55420) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 13:01:43 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:55420
+2025-01-01 13:01:43 - SocTools.ps1: Connection Established!
+2025-01-01 13:01:43 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:55420)
+2025-01-01 13:01:43 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:01:43 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 13:01:43 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:01:48 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 13:01:48 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 13:01:48 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 13:01:48 - SocTools.ps1:   Gathering system information...
+2025-01-01 13:01:48 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 13:01:48 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 13:01:51 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 13:01:51 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 13:01:51 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.6, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 13:01:52 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 13:01:52 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:01:52 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:01:52 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'table': 'DESKTOP-JUJ4D1S scott console 1 Active none 1/1/2025 12:44 PM'}}}
+2025-01-01 13:04:43 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 13:04:44 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 13:04:44 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 13:04:44 - SocTools.ps1:   Gathering system information...
+2025-01-01 13:04:44 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 13:04:44 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 13:04:45 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 13:04:45 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 13:04:45 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.59, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 13:04:46 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 13:04:46 -       app.py: Generator Exited
+2025-01-01 13:04:46 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:04:46 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:04:46 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'table': 'DESKTOP-JUJ4D1S scott console 1 Active none 1/1/2025 12:44 PM'}}}
+2025-01-01 13:05:55 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 13:05:56 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 13:05:56 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 13:05:56 - SocTools.ps1:   Gathering system information...
+2025-01-01 13:05:56 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 13:05:56 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 13:05:57 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 13:05:57 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 13:05:57 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.59, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 13:05:58 -       app.py: Generator Exited
+2025-01-01 13:05:58 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 13:05:58 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:05:58 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:05:58 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'table': 'DESKTOP-JUJ4D1S scott console 1 Active none 1/1/2025 12:44 PM'}}}
+2025-01-01 13:06:43 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 13:07:44 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 13:07:44 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 13:07:44 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 13:07:44 - SocTools.ps1:   Gathering system information...
+2025-01-01 13:07:44 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 13:07:44 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 13:07:45 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 13:07:46 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 13:07:46 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.59, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 13:07:46 -       app.py: Generator Exited
+2025-01-01 13:07:46 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 13:07:46 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:07:47 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:07:47 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'table': 'DESKTOP-JUJ4D1S scott console 1 Active none 1/1/2025 12:44 PM'}}}
+2025-01-01 13:08:19 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 13:08:19 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 13:08:19 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 13:08:19 - SocTools.ps1:   Gathering system information...
+2025-01-01 13:08:20 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 13:08:20 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 13:08:21 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 13:08:21 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 13:08:21 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.59, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 13:08:22 -       app.py: Generator Exited
+2025-01-01 13:08:22 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 13:08:22 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:08:22 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:08:22 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'table': 'DESKTOP-JUJ4D1S scott console 1 Active none 1/1/2025 12:44 PM'}}}
+2025-01-01 13:11:43 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 13:12:36 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:12:36 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 13:12:36 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:12:36 - SocTools.ps1: SocTools.ps1 started. Process ID: 13108
+2025-01-01 13:12:36 - SocTools.ps1: app.py started. Process ID: 24828
+2025-01-01 13:12:36 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 13:12:37 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 13:12:37 -       app.py: Connected Established!
+2025-01-01 13:12:37 -       app.py: app.py(127.0.0.1:64016) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 13:12:37 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:64016
+2025-01-01 13:12:37 - SocTools.ps1: Connection Established!
+2025-01-01 13:12:37 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:64016)
+2025-01-01 13:12:37 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:12:37 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 13:12:37 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:12:42 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 13:12:42 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 13:12:42 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 13:12:42 - SocTools.ps1:   Gathering system information...
+2025-01-01 13:12:42 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 13:12:42 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 13:12:45 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 13:12:45 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 13:12:46 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.59, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 13:12:46 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 13:12:46 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:12:46 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:12:46 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'id': '1', 'logontime': '  ', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active', 'session': 'console'}}}
+2025-01-01 13:15:30 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:15:30 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 13:15:30 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:15:30 - SocTools.ps1: SocTools.ps1 started. Process ID: 8180
+2025-01-01 13:15:30 - SocTools.ps1: app.py started. Process ID: 13356
+2025-01-01 13:15:30 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 13:15:30 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 13:15:30 -       app.py: Connected Established!
+2025-01-01 13:15:30 -       app.py: app.py(127.0.0.1:55400) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 13:15:30 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:55400
+2025-01-01 13:15:30 - SocTools.ps1: Connection Established!
+2025-01-01 13:15:30 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:55400)
+2025-01-01 13:15:30 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:15:30 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 13:15:30 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:15:38 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 13:15:39 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 13:15:39 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 13:15:39 - SocTools.ps1:   Gathering system information...
+2025-01-01 13:15:39 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 13:15:39 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 13:15:41 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 13:15:42 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 13:15:42 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.6, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 13:15:42 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 13:15:42 -       app.py: Generator Exited
+2025-01-01 13:15:42 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:15:42 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:15:42 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '  ', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 13:16:42 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 13:16:42 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 13:16:42 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 13:16:42 - SocTools.ps1:   Gathering system information...
+2025-01-01 13:16:42 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 13:16:42 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 13:16:43 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 13:16:43 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 13:16:44 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.6, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 13:16:44 -       app.py: Generator Exited
+2025-01-01 13:16:44 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 13:16:44 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:16:44 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:16:44 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '  ', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 13:18:05 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 13:18:06 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 13:18:06 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 13:18:06 - SocTools.ps1:   Gathering system information...
+2025-01-01 13:18:06 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 13:18:06 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 13:18:07 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 13:18:07 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 13:18:08 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.59, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 13:18:08 -       app.py: Generator Exited
+2025-01-01 13:18:08 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 13:18:08 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:18:08 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:18:08 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '  ', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 13:18:18 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 13:18:18 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 13:18:19 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 13:18:19 - SocTools.ps1:   Gathering system information...
+2025-01-01 13:18:19 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 13:18:19 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 13:18:20 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 13:18:20 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 13:18:21 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.59, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 13:18:21 -       app.py: Generator Exited
+2025-01-01 13:18:21 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 13:18:21 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:18:21 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:18:21 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '  ', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 13:18:57 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:18:57 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 13:18:57 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:18:57 - SocTools.ps1: SocTools.ps1 started. Process ID: 36764
+2025-01-01 13:18:57 - SocTools.ps1: app.py started. Process ID: 5156
+2025-01-01 13:18:57 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 13:18:58 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 13:18:58 -       app.py: Connected Established!
+2025-01-01 13:18:58 -       app.py: app.py(127.0.0.1:55340) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 13:18:58 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:55340
+2025-01-01 13:18:58 - SocTools.ps1: Connection Established!
+2025-01-01 13:18:58 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:55340)
+2025-01-01 13:18:58 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:18:58 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 13:18:58 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:19:02 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 13:19:02 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 13:19:02 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 13:19:02 - SocTools.ps1:   Gathering system information...
+2025-01-01 13:19:02 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 13:19:02 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 13:19:05 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 13:19:05 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 13:19:06 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.59, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 13:19:06 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 13:19:06 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:19:06 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:19:06 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '  ', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 13:19:50 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:19:50 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 13:19:50 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:19:50 - SocTools.ps1: SocTools.ps1 started. Process ID: 34556
+2025-01-01 13:19:50 - SocTools.ps1: app.py started. Process ID: 22728
+2025-01-01 13:19:50 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 13:19:50 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 13:19:50 -       app.py: Connected Established!
+2025-01-01 13:19:50 -       app.py: app.py(127.0.0.1:55411) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 13:19:50 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:55411
+2025-01-01 13:19:50 - SocTools.ps1: Connection Established!
+2025-01-01 13:19:50 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:55411)
+2025-01-01 13:19:50 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:19:50 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 13:19:50 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:19:54 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 13:19:55 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 13:19:55 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 13:19:55 - SocTools.ps1:   Gathering system information...
+2025-01-01 13:19:55 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 13:19:55 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 13:19:57 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 13:19:58 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 13:19:58 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.59, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 13:19:58 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 13:19:58 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:19:58 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:19:58 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': 'DESKTOP-JUJ4D1S scott console 1 Active none 1/1/2025 12:44 PM[6] DESKTOP-JUJ4D1S scott console 1 Active none 1/1/2025 12:44 PM[7] DESKTOP-JUJ4D1S scott console 1 Active none 1/1/2025 12:44 PM[8]', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 13:20:40 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:20:40 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 13:20:40 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:20:40 - SocTools.ps1: SocTools.ps1 started. Process ID: 15112
+2025-01-01 13:20:40 - SocTools.ps1: app.py started. Process ID: 37572
+2025-01-01 13:20:40 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 13:20:40 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 13:20:40 -       app.py: Connected Established!
+2025-01-01 13:20:40 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:55440
+2025-01-01 13:20:40 -       app.py: app.py(127.0.0.1:55440) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 13:20:40 - SocTools.ps1: Connection Established!
+2025-01-01 13:20:40 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:55440)
+2025-01-01 13:20:40 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:20:40 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 13:20:40 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 13:20:47 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 13:20:47 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 13:20:47 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 13:20:47 - SocTools.ps1:   Gathering system information...
+2025-01-01 13:20:47 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 13:20:47 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 13:20:49 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 13:20:50 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 13:20:50 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.59, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 13:20:50 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 13:20:50 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:20:50 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:20:50 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '1/1/2025 12:44 PM', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 13:25:40 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 13:27:11 -       app.py: Auto Refresh interval changed to : 5
+2025-01-01 13:27:16 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:27:16 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:27:16 -       app.py: Received from powershell before processing: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '1/1/2025 12:44 PM', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 13:27:21 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:27:21 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:27:21 -       app.py: Received from powershell before processing: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '1/1/2025 12:44 PM', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 13:27:26 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:27:26 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:27:26 -       app.py: Received from powershell before processing: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '1/1/2025 12:44 PM', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 13:27:31 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:27:31 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:27:32 -       app.py: Received from powershell before processing: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '1/1/2025 12:44 PM', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 13:27:37 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:27:37 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:27:37 -       app.py: Received from powershell before processing: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '1/1/2025 12:44 PM', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 13:27:38 -       app.py: Auto Refresh interval changed to : -1
+2025-01-01 13:27:42 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 13:27:42 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 13:27:42 -       app.py: Received from powershell before processing: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '1/1/2025 12:44 PM', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 13:30:40 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 13:35:40 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 13:40:40 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 13:45:40 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 13:50:41 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 13:55:41 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 14:00:41 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 14:05:41 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 14:10:41 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 14:15:41 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 14:20:41 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 14:25:41 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 14:30:41 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 14:35:41 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 14:40:42 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 14:45:42 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 14:50:42 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 14:55:12 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 14:55:12 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 14:55:12 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2025-01-01 14:55:12 - SocTools.ps1:   Gathering system information...
+2025-01-01 14:55:12 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 14:55:12 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 14:55:14 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 14:55:14 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 14:55:14 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735764232500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.59, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2025-01-01 14:55:15 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2025-01-01 14:55:15 -       app.py: Generator Exited
+2025-01-01 14:55:15 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2025-01-01 14:55:15 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2025-01-01 14:55:15 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '1/1/2025 12:44 PM', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}

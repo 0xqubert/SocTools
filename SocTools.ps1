@@ -117,7 +117,7 @@ function GetSocPcInfo($result){
                 LogWrite("Computer $computer is reachable.")
                 # --- Gather System Information ---
                 LogWrite "  Gathering system information..."
-                $computerSystem = Get-WmiObject -Class Win32_ComputerSystem -ComputerName $computer -ErrorAction Stop # Temporarily change to Stop for testing
+                $computerSystem = Get-WmiObject -Class Win32_ComputerSystem -ComputerName $computer -ErrorAction SilentlyContinue # Temporarily change to Stop for testing
                 if ($computerSystem) {
                     $model = $($computerSystem.Model)
                     $manufacturer = $($computerSystem.Manufacturer)
@@ -136,7 +136,7 @@ function GetSocPcInfo($result){
 
                 # --- Gather Disk Space Information ---
                 LogWrite "  Gathering disk space information..."
-                $diskDrives = Get-WmiObject -Class Win32_LogicalDisk -Filter "DriveType=3" -ComputerName $computer -ErrorAction Stop # Temporarily change to Stop for testing
+                $diskDrives = Get-WmiObject -Class Win32_LogicalDisk -Filter "DriveType=3" -ComputerName $computer -ErrorAction SilentlyContinue # Temporarily change to Stop for testing
                 if($diskDrives){
                    foreach ($disk in $diskDrives) {
                         $drive = "$($disk.DeviceID) $($disk.VolumeName)"
@@ -158,7 +158,7 @@ function GetSocPcInfo($result){
                         LogWrite "    *No software matching name `"$item`" was found*"
                     }
                 }
-                $lastreboot = [System.Management.ManagementDateTimeConverter]::ToDateTime((Get-WmiObject Win32_OperatingSystem -ComputerName . -ErrorAction Stop).LastBootUpTime) #Temporarily changed for debug purposes.
+                $lastreboot = [System.Management.ManagementDateTimeConverter]::ToDateTime((Get-WmiObject Win32_OperatingSystem -ComputerName . -ErrorAction SilentlyContinue).LastBootUpTime) #Temporarily changed for debug purposes.
             } else {
                 LogWrite -logMessage "    Error: $computer is unreachable"
             }
@@ -193,6 +193,8 @@ function GetSocPcInfo($result){
 }
 
 function GetCurrentUserInfo($result){
+    $response = [ResponseObject]::new()
+    $systemList = @{}
     try{
         $tableSubstring = (query user)[0] -split '\s+'
         $tableHeaders = '         '   
@@ -229,15 +231,21 @@ function GetCurrentUserInfo($result){
                     $fullstring += $string
                 }
             }
+            $fullstring = $fullstring -split '\s+'
+            $systemList["$computer"] = @{
+                "computer" =  $fullstring[0]
+                "username" =  $fullstring[1]
+                "sessionname" =  $fullstring[2]
+                "id" =  $fullstring[3]
+                "state" =  $fullstring[4]
+                "idletime" =  $fullstring[5]
+                "logontime" =  $fullstring[6] + " " + $fullstring[7] + " " + $fullstring[8]
+            }
         }
-        $fullstring = $fullstring -split '\s+'
-        $output = @{
-            "table" =  $fullstring
-        }
-        $response = [ResponseObject]::new()
+        
         $response.action = $($MyInvocation.MyCommand.Name)
         $response.success = $true
-        $response.output = $output
+        $response.output = $systemList
         return $response | ConvertTo-Json
     }catch{
         return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_

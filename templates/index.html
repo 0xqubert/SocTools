@@ -167,17 +167,26 @@ Created: 12/31/2024
                                 console.log(`Key: ${system}, Value: ${systemNames[system]}`);
                                 const pcSection =  createPCSection(systemNames[system], system)
                                 leftPcContainer.appendChild(pcSection)
-                                sendCommand("GetCurrentUserInfo", null, 0)
+                                
                             }
                         }
+                        sendCommand("GetCurrentUserInfo", null, 0)
                     }
                     if(result.action == "GetCurrentUserInfo"){
-                        (document.getElementById(`${result.output.table[0]}-username`)).innerText = result.output.table[1];
-                        (document.getElementById(`${result.output.table[0]}-sessionname`)).innerText = result.output.table[2];
-                        (document.getElementById(`${result.output.table[0]}-id`)).innerText = result.output.table[3];
-                        (document.getElementById(`${result.output.table[0]}-state`)).innerText = result.output.table[4];
-                        (document.getElementById(`${result.output.table[0]}-idletime`)).innerText = result.output.table[5];
-                        (document.getElementById(`${result.output.table[0]}-logontime`)).innerText = `${result.output.table[6]} ${result.output.table[7]} ${result.output.table[8]}`;
+                        const systemNames = result.output;
+                        for(const system in systemNames){
+                            if (systemNames.hasOwnProperty(system)){
+                                console.log(`Key: ${system}, Value: ${systemNames[system]}`);
+                                (document.getElementById(`${system}-username`)).innerText = systemNames[system].username;
+                                (document.getElementById(`${system}-sessionname`)).innerText = systemNames[system].sessionname;
+                                (document.getElementById(`${system}-id`)).innerText = systemNames[system].id;
+                                (document.getElementById(`${system}-state`)).innerText = systemNames[system].state;
+                                (document.getElementById(`${system}-idletime`)).innerText = systemNames[system].idletime;
+                                (document.getElementById(`${system}-logontime`)).innerText = systemNames[system].logontime;
+                                
+                            }
+                        }
+
                     }
                 }
                 else{
@@ -207,18 +216,7 @@ Created: 12/31/2024
                 try {
                     const result = JSON.parse(event.data);
                     console.log("Parsed SSE data:", result)
-                    if(result.action == "GetCurrentUserInfo"){
-                        (document.getElementById(`${result.output.table[0]}-username`)).innerText = result.output.table[1];
-                        (document.getElementById(`${result.output.table[0]}-sessionname`)).innerText = result.output.table[2];
-                        (document.getElementById(`${result.output.table[0]}-id`)).innerText = result.output.table[3];
-                        (document.getElementById(`${result.output.table[0]}-state`)).innerText = result.output.table[4];
-                        (document.getElementById(`${result.output.table[0]}-idletime`)).innerText = result.output.table[5];
-                        (document.getElementById(`${result.output.table[0]}-logontime`)).innerText = result.output.table[6];
-                        if(result.output.table[4] == "Active"){
-                            rdpButton = document.getElementsByClassName("rdp-button");
-                            rdpButton[0].style.backgroundColor = "gray";
-                        }
-                    }
+                    //Code here
                 } catch (error) {
                     console.error("Error parsing SSE data:", error);
                     console.error("SSE Event Data:", event.data);
