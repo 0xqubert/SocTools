@@ -466,7 +466,7 @@ function ClearResults(){
 # Function to Launch app.py
 function Start-AppPy {
     # Start app.py with named pipe argument
-    $process = Start-Process -FilePath ".venv\Scripts\python.exe" -ArgumentList "app.py" -PassThru
+    $process = Start-Process -FilePath "python-3.12.0-embed\python.exe" -ArgumentList "app.py" -PassThru
     # Return information about the process
     return @{
         Process = $process
