@@ -1,7 +1,6 @@
 #SocTools.ps1
 #Author: Scott Stage
 #Created: 12/31/2024
-
 <#Requires -RunAsAdministrator#>
 # Set the log file path
 $hostname = '127.0.0.1'
@@ -467,7 +466,7 @@ function ClearResults(){
 # Function to Launch app.py
 function Start-AppPy {
     # Start app.py with named pipe argument
-    $process = Start-Process -FilePath "python3" -ArgumentList "app.py" -PassThru
+    $process = Start-Process -FilePath ".venv\Scripts\python.exe" -ArgumentList "app.py" -PassThru
     # Return information about the process
     return @{
         Process = $process

@@ -3220,3 +3220,47 @@
 2024-12-31 17:28:33 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'table': ['DESKTOP-JUJ4D1S', 'scott', 'console', '1', 'Active', 'none', '12/31/2024', '12:15', 'PM']}}
 2024-12-31 17:28:33 -       app.py: Generator Exited
 2024-12-31 17:32:29 - SocTools.ps1: Command received: {"action": "keepalive"}
+2024-12-31 19:37:38 - SocTools.ps1: -------------------------------------------------------------
+2024-12-31 19:37:38 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2024-12-31 19:37:38 - SocTools.ps1: -------------------------------------------------------------
+2024-12-31 19:37:38 - SocTools.ps1: SocTools.ps1 started. Process ID: 22220
+2024-12-31 19:37:38 - SocTools.ps1: app.py started. Process ID: 34268
+2024-12-31 19:37:38 - SocTools.ps1: Listening on 127.0.0.1:65432
+2024-12-31 19:37:39 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2024-12-31 19:37:39 -       app.py: Connected Established!
+2024-12-31 19:37:39 -       app.py: app.py(127.0.0.1:55343) <---> SocTools.ps1(127.0.0.1:65432)
+2024-12-31 19:37:39 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:55343
+2024-12-31 19:37:39 - SocTools.ps1: Connection Established!
+2024-12-31 19:37:39 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:55343)
+2024-12-31 19:37:39 - SocTools.ps1: -------------------------------------------------------------
+2024-12-31 19:37:39 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2024-12-31 19:37:39 - SocTools.ps1: -------------------------------------------------------------
+2024-12-31 19:38:07 - SocTools.ps1: -------------------------------------------------------------
+2024-12-31 19:38:07 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2024-12-31 19:38:07 - SocTools.ps1: -------------------------------------------------------------
+2024-12-31 19:38:07 - SocTools.ps1: SocTools.ps1 started. Process ID: 36532
+2024-12-31 19:38:07 - SocTools.ps1: app.py started. Process ID: 20140
+2024-12-31 19:38:07 - SocTools.ps1: Listening on 127.0.0.1:65432
+2024-12-31 19:38:08 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2024-12-31 19:38:08 -       app.py: Connected Established!
+2024-12-31 19:38:08 -       app.py: app.py(127.0.0.1:55403) <---> SocTools.ps1(127.0.0.1:65432)
+2024-12-31 19:38:08 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:55403
+2024-12-31 19:38:08 - SocTools.ps1: Connection Established!
+2024-12-31 19:38:08 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:55403)
+2024-12-31 19:38:08 - SocTools.ps1: -------------------------------------------------------------
+2024-12-31 19:38:08 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2024-12-31 19:38:08 - SocTools.ps1: -------------------------------------------------------------
+2024-12-31 19:38:31 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2024-12-31 19:38:31 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2024-12-31 19:38:31 - SocTools.ps1: Computer DESKTOP-JUJ4D1S is reachable.
+2024-12-31 19:38:31 - SocTools.ps1:   Gathering system information...
+2024-12-31 19:38:31 - SocTools.ps1:   Gathering disk space information...
+2024-12-31 19:38:31 - SocTools.ps1:   Gathering installed software information...
+2024-12-31 19:38:34 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2024-12-31 19:38:35 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2024-12-31 19:38:35 -       app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'lastreboot': '/Date(1735676131500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 208.73, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}}
+2024-12-31 19:38:35 -       app.py: Generator Exited
+2024-12-31 19:38:35 -       app.py: Sending Command: {'action': 'GetCurrentUserInfo'}
+2024-12-31 19:38:35 - SocTools.ps1: Command received: {"action": "GetCurrentUserInfo"}
+2024-12-31 19:38:35 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
+2024-12-31 19:38:35 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'table': ['DESKTOP-JUJ4D1S', 'scott', 'console', '1', 'Active', 'none', '12/31/2024', '12:15', 'PM']}}
