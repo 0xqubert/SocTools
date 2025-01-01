@@ -1,9 +1,13 @@
 <#Requires -RunAsAdministrator#>
 # Set the log file path
+$hostname = '127.0.0.1'
+$port = 65432
+$appProcess = $null
 $logFile = "logs\SocTools.log"  #Change this to your desired log path
 $delimiter = "__END_OF_RESPONSE__"
 $computerList = @(
-            "DESKTOP-JUJ4D1S"
+            "DESKTOP-JUJ4D1S"#,
+            #"DESKTOP-B1N8PA8"
             #"computer2",
             #"computer3"
             # Add more computer names as needed
@@ -27,7 +31,8 @@ function Write-ErrorResponse {
         [string]$FunctionName,
         [System.Exception]$Exception
     )
-    $errorMessage = "Error in $FunctionName :" + $($Exception.Message)
+    $ErrorLineNumber = $Exception.InvocationInfo.ScriptLineNumber
+    $errorMessage = "Error in $FunctionName (Line: $ErrorLineNumber) : $($Exception.Message)"
     LogWrite -logMessage $errorMessage
     return @{
         Success = $false
@@ -94,121 +99,94 @@ function keepalive($result){
         return $response | ConvertTo-Json
     }
 	catch{
-		return Write-ErrorResponse -FunctionName "keepalive" -Exception $_.Exception
+		return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_.Exception
 	}
 }
 
 function GetSocPcInfo($result){
+    $response = [ResponseObject]::new()
+    $systemList = @{}
     try{
-
         $softwareResultsList = @{}
-
-
         # Iterate through each computer in the list
         foreach ($computer in $computerList) {
-            LogWrite("Starting processing for computer: $computer")
-
-            # Check if the computer is reachable
-            #$pingResult = Test-Connection -ComputerName $computer -Quiet
-            if ($true) {
+            if ($true) { #Verify this block is entered.
                 LogWrite("Computer $computer is reachable.")
-                try {
-                    # --- Gather System Information ---
-                    LogWrite "Gathering system information..."
-                    $computerSystem = Get-WmiObject -Class Win32_ComputerSystem -ComputerName $computer -ErrorAction Stop
-                    if ($computerSystem) {
-                        $model = $($computerSystem.Model)
-                        $manufacturer = $($computerSystem.Manufacturer)
-                        $memory = $([math]::Round(($computerSystem.TotalPhysicalMemory / 1GB), 2))
-                        $computerName = $($computerSystem.Name)
-                        if($computerSystem.UserName){
-                            $loggedInUser = $($computerSystem.UserName)
-                            $currentuser = ($loggedInUser -split '\\')[-1]
-                        }
-                        else{
-                            LogWrite "   No logged in user."
-                        }
-                    } else {
-                        LogWrite "   Error: Could not retrieve Win32_ComputerSystem data."
+                # --- Gather System Information ---
+                LogWrite "  Gathering system information..."
+                $computerSystem = Get-WmiObject -Class Win32_ComputerSystem -ComputerName $computer -ErrorAction Stop # Temporarily change to Stop for testing
+                if ($computerSystem) {
+                    $model = $($computerSystem.Model)
+                    $manufacturer = $($computerSystem.Manufacturer)
+                    $memory = $([math]::Round(($computerSystem.TotalPhysicalMemory / 1GB), 2))
+                    $computerName = $($computerSystem.Name)
+                    if($computerSystem.UserName){
+                        $loggedInUser = $($computerSystem.UserName)
+                        $currentuser = ($loggedInUser -split '\\')[-1]
                     }
-
-                    # --- Gather Disk Space Information ---
-                    LogWrite "Gathering disk space information..."
-                    $diskDrives = Get-WmiObject -Class Win32_LogicalDisk -Filter "DriveType=3" -ComputerName $computer -ErrorAction Stop
-                    if($diskDrives){
-                       foreach ($disk in $diskDrives) {
-                            $drive = "$($disk.DeviceID) $($disk.VolumeName)"
-                            $driveSize = $([math]::Round(($disk.Size / 1GB), 2))
-                            $freeSpace = $([math]::Round(($disk.FreeSpace / 1GB), 2))
-                        }
-                    } else {
-                        LogWrite "   Error: Could not retrieve Win32_LogicalDisk data."
+                    else{
+                        LogWrite "  No logged in user."
                     }
-                    # --- Gather Installed Software Information ---
-                    LogWrite "Gathering installed software information..."
-                    $softwareList = @("Visual Studio Code", "Crowdstrike", "Zscaler")
-                    try{
-                        foreach($item in $softwareList){
-                            $softwareInfo = Get-Package | Where-Object {$_.Name -like "*$item*"}  | Select-Object Name, Version
-                            if($softwareInfo)
-                            {
-                                $softwareResultsList[($item)] = "$($softwareInfo.Name) - Version: $($softwareInfo.Version)"
-                            }
-                            else
-                            {
-                                LogWrite "   No software matching name `"$item`" was found."
-                            }
-                        }
-                    }
-                     catch {
-                        LogWrite "   Error retrieving installed software information: $($_.Exception.Message)"
-                    }
-                    try{
-                        $lastreboot = [System.Management.ManagementDateTimeConverter]::ToDateTime((Get-WmiObject Win32_OperatingSystem -ComputerName . ).LastBootUpTime)
-                    }catch {
-                        LogWrite "   Error retrieving last reboot time: $($_.Exception.Message)"
-                    }
-
-                    LogWrite "Finished gathering information for $computer."
-
+                } else {
+                    LogWrite "    Error: Could not retrieve Win32_ComputerSystem data."
                 }
-                catch {
-                    LogWrite "Error retrieving data for $computer : $($_.Exception.Message)"
 
+                # --- Gather Disk Space Information ---
+                LogWrite "  Gathering disk space information..."
+                $diskDrives = Get-WmiObject -Class Win32_LogicalDisk -Filter "DriveType=3" -ComputerName $computer -ErrorAction Stop # Temporarily change to Stop for testing
+                if($diskDrives){
+                   foreach ($disk in $diskDrives) {
+                        $drive = "$($disk.DeviceID) $($disk.VolumeName)"
+                        $driveSize = $([math]::Round(($disk.Size / 1GB), 2))
+                        $freeSpace = $([math]::Round(($disk.FreeSpace / 1GB), 2))
+                    }
+                }else{
+                    LogWrite "    Error: Could not retrieve Win32_LogicalDisk data."
                 }
+                # --- Gather Installed Software Information ---
+                LogWrite "  Gathering installed software information..."
+                $softwareList = @("Visual Studio Code", "Crowdstrike", "Zscaler")
+                foreach($item in $softwareList){
+                    $softwareInfo = Get-Package | Where-Object {$_.Name -like "*$item*"} -ErrorAction SilentlyContinue | Select-Object Name, Version 
+                    if($softwareInfo){
+                        $softwareResultsList[($item)] = "$($softwareInfo.Name) - Version: $($softwareInfo.Version)"
+                    }
+                    else{
+                        LogWrite "    *No software matching name `"$item`" was found*"
+                    }
+                }
+                $lastreboot = [System.Management.ManagementDateTimeConverter]::ToDateTime((Get-WmiObject Win32_OperatingSystem -ComputerName . -ErrorAction Stop).LastBootUpTime) #Temporarily changed for debug purposes.
             } else {
-                LogWrite "Computer $computer is unreachable."
+                LogWrite -logMessage "    Error: $computer is unreachable"
             }
-        }
-        LogWrite "Script execution completed."
-        $output = @{
-            "computername" =  $computerName
-            "currentuser" =  $currentuser
-            "manufacturer" =  $manufacturer
-            "lastreboot" = $lastreboot
-            "pingresult" = $pingResult
-            "drivesize" =  $driveSize
-            "freespace" =  $freeSpace
-            "memory" =  $memory
-            "drive" =  $drive
-            "model" = $model
-            "os" =  $os
-            "forcepoint" = $forcepoint
-            "zscaler" = $zscaler
-            "crowdstrike" = $crowdstrike
-            "ciscoanyconnect" = $ciscoanyconnect
-            "visualstudio" = $($softwareResultsList["Visual Studio Code"])
-        }
-        $response = [ResponseObject]::new()
+            $systemList["$computer"] = @{
+                "computername" =  $computerName
+                "currentuser" =  $currentuser
+                "manufacturer" =  $manufacturer
+                "lastreboot" = $lastreboot
+                "pingresult" = $pingResult
+                "drivesize" =  $driveSize
+                "freespace" =  $freeSpace
+                "memory" =  $memory
+                "drive" =  $drive
+                "model" = $model
+                "os" =  $os
+                "forcepoint" = $forcepoint
+                "zscaler" = $zscaler
+                "crowdstrike" = $crowdstrike
+                "ciscoanyconnect" = $ciscoanyconnect
+                "visualstudio" = $($softwareResultsList["Visual Studio Code"])
+            }
+        }        
+
         $response.action = $($MyInvocation.MyCommand.Name)
         $response.success = $true
-        $response.output = $output
+        $response.output = $systemList 
         return $response | ConvertTo-Json
     }
     catch{
-        return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_.Exception
+        return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
     }
-
 }
 
 function GetCurrentUserInfo($result){
@@ -218,9 +196,9 @@ function GetCurrentUserInfo($result){
         $tableHeaders += $tableSubstring[1] + '                                       ' + $tableSubstring[2] + '         ' + $tableSubstring[3] + ' ' + $tableSubstring[4] + '       ' + $tableSubstring[5] + '   ' + $tableSubstring[6]
         $fullstring = ""
         foreach ($computer in $computerList) {
-            LogWrite("Getting logged in user for computer: $computer")
+            LogWrite("Getting logged in user for $computer :")
             if (!(Test-Connection $computer -Count 1 -Quiet)){
-                    write-host $computer "Offline" -ForegroundColor Red
+                 LogWrite -logMessage ("    Error: $computer is unreachable")
             }
             else{
                 $userTable = (query user /server:$computer 2>$null)
@@ -249,7 +227,6 @@ function GetCurrentUserInfo($result){
                 }
             }
         }
-        LogWrite "Script execution completed."
         $fullstring = $fullstring -split '\s+'
         $output = @{
             "table" =  $fullstring
@@ -260,16 +237,22 @@ function GetCurrentUserInfo($result){
         $response.output = $output
         return $response | ConvertTo-Json
     }catch{
-        return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_.Exception
+        return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
     }
 }
 
 function ConnectRdp($result){
-    $system = $result.input
+    $targetComputer = $result.input
     try{
-        Start-Process "$env:windir\system32\mstsc.exe" -ArgumentList "/v:$system"
+        $processStartInfo = New-Object System.Diagnostics.ProcessStartInfo
+        $processStartInfo.FileName = "$env:windir\system32\mstsc.exe"
+        $processStartInfo.Arguments = "/v:$targetComputer"
+        $processStartInfo.UseShellExecute = $true #Required to launch programs
+        [System.Diagnostics.Process]::Start($processStartInfo)
+        LogWrite -logMessage "Successfully started RDP with argument: $targetComputer"
+
         $output = @{
-            "message" =  "Started new rpd process"
+            "message" =  "Started new rpd process with argument: $targetComputer"
         }
         $response = [ResponseObject]::new()
         $response.action = $($MyInvocation.MyCommand.Name)
@@ -277,15 +260,15 @@ function ConnectRdp($result){
         $response.output = $output
         return $response | ConvertTo-Json
     }catch{
-        return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_.Exception
+        return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
     }
 }
 
 function RevokeMessage($userInput){
     LogWrite -logMessage "Starting RevokeMessage function."
     try{
-       $MessageIDs = Split-UserInput -Input $userInput
-       if($MessageIDs){
+        $MessageIDs = Split-UserInput -Input $userInput
+        if($MessageIDs){
             $output = ""
             foreach ($ID in $MessageIDs)
             {
@@ -295,18 +278,18 @@ function RevokeMessage($userInput){
                 Success = $true
                 Output = $output
             }
-       }
-       else{
+        }
+        else{
             $noMessageId = "No Message ID's provided"
             LogWrite -logMessage $noMessageId
             return @{
                 Success = $false
                 Error = $noMessageId
             }
-       }
+        }
 	}
 	catch{
-		return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_.Exception
+		return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
 	}
 }
 
@@ -321,7 +304,7 @@ function SetSearchName($searchName){
         }
 	}
 	catch{
-        return Write-ErrorResponse -FunctionName "SetSearchName" -Exception $_.Exception
+        return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
 	}
     LogWrite -logMessage "Finished SetSearchName function."
 }
@@ -338,7 +321,7 @@ function PerformHardDelete($searchName){
         }
     }
 	catch{
-		return Write-ErrorResponse -FunctionName "PerformHardDelete" -Exception $_.Exception
+		return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
 	}
     LogWrite -logMessage "Finished PerformHardDelete function."
 }
@@ -353,7 +336,7 @@ function UpdatePurgeStatus($searchName, $purgeString){
         }
     }
 	catch{
-		return Write-ErrorResponse -FunctionName "UpdatePurgeStatus" -Exception $_.Exception
+		return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
 	}
     LogWrite -logMessage "Finished UpdatePurgeStatus function."
 }
@@ -382,7 +365,7 @@ function CheckRevokeStatus($userInput){
             }
         }
 	}catch{
-		return Write-ErrorResponse -FunctionName "CheckRevokeStatus" -Exception $_.Exception
+		return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
 	}
     LogWrite -logMessage "Finished CheckRevokeStatus function."
 }
@@ -398,7 +381,7 @@ function SetTimeRange(){
         }
 	}
 	catch{
-		return Write-ErrorResponse -FunctionName "SetTimeRange" -Exception $_.Exception
+		return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
 	}
     LogWrite -logMessage "Finished SetTimeRange function."
 }
@@ -414,7 +397,7 @@ function SetUser(){
         }
 	}
 	catch{
-		return Write-ErrorResponse -FunctionName "SetUser" -Exception $_.Exception
+		return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
 	}
     LogWrite -logMessage "Finished SetUser function."
 }
@@ -429,7 +412,7 @@ function SetOperations(){
         }
 	}
 	catch{
-		return Write-ErrorResponse -FunctionName "SetOperations" -Exception $_.Exception
+		return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
 	}
     LogWrite -logMessage "Finished SetOperations function."
 }
@@ -444,7 +427,7 @@ function SetMessageID(){
         }
 	}
 	catch{
-		return Write-ErrorResponse -FunctionName "SetMessageID" -Exception $_.Exception
+		return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
 	}
     LogWrite -logMessage "Finished SetMessageID function."
 }
@@ -459,7 +442,7 @@ function SEARCH(){
         }
 		}
 		catch{
-			return Write-ErrorResponse -FunctionName "SEARCH" -Exception $_.Exception
+			return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
 		}
     LogWrite -logMessage "Finished SEARCH function."
 }
@@ -472,35 +455,26 @@ function ClearResults(){
         }
 	}
 	catch{
-        return Write-ErrorResponse -FunctionName "SetSearchName" -Exception $_.Exception
+        return Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
 	}
     LogWrite -logMessage "Finished ClearResults function."
 }
 
 # Function to Launch app.py
 function Start-AppPy {
-
     # Start app.py with named pipe argument
     $process = Start-Process -FilePath "python3" -ArgumentList "app.py" -PassThru
-
     # Return information about the process
     return @{
         Process = $process
     }
 }
 
-$hostname = '127.0.0.1'
-$port = 65432
-$delimiter = "__END_OF_RESPONSE__"
-
-# Define $appProcess in script scope
-$appProcess = $null
-
 function main(){
-     # Start app.py and get the pipe information
-     Write-Host "-------------------------------------------------------------"
-     Write-Host "------------------- SocTools Initializing -------------------"
-     Write-Host "-------------------------------------------------------------"
+    # Start app.py and get the pipe information
+    Write-Host "-------------------------------------------------------------"
+    Write-Host "------------------- SocTools Initializing -------------------"
+    Write-Host "-------------------------------------------------------------"
     LogWrite -logMessage "-------------------------------------------------------------"
     LogWrite -logMessage "------------------- SocTools Initializing -------------------"
     LogWrite -logMessage "-------------------------------------------------------------"
@@ -567,11 +541,11 @@ function main(){
                             &$action($result)
                         } catch {
                             $response = @{
-                                "error" = "Error executing command: $($_.Exception.Message)";
+                                "error" = $($_.Exception.Message);
                                 "success" = $false;
                                 "action" = $action
                             } | ConvertTo-Json
-                            LogWrite -logMessage "Error response generated: $($response)"; # Log the error response
+                            LogWrite -logMessage "Error response generated: $($_)"; # Log the error response
                         }
                         $writer.WriteLine($response + $delimiter)
                         $writer.Flush()
@@ -599,7 +573,7 @@ function main(){
         }
     }
     catch{
-        LogWrite "Exception occurred: $($_.Exception.Message)"
+        Write-ErrorResponse -FunctionName $($MyInvocation.MyCommand.Name) -Exception $_
     }
     finally
     {

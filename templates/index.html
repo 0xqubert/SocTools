@@ -34,22 +34,22 @@
         let eventSource = null;
 
 
-        function createPCSection(pcData, index) {
+        function createPCSection(systemInfo, key) {
             const pcSection = document.createElement('div');
             pcSection.classList.add('pc-section');
 
             const rdpButton = document.createElement('button');
             rdpButton.classList.add('rdp-button')
-            rdpButton.textContent = `Connect to ${pcData.output.computername}`;
+            rdpButton.textContent = `Connect to ${systemInfo.computername}`;
             rdpButton.addEventListener('click', () => {
                 //Logic to connect to RDP goes here.
-                console.log("Attempting to connect to PC", index + 1)
-                statusMessageDiv.innerText = `Attempting to connect to PC ${index + 1}`;
-                sendCommand("ConnectRdp", pcData.output.computername, 0)    
+                //console.log("Attempting to connect to PC", index + 1)
+                //statusMessageDiv.innerText = `Attempting to connect to PC ${index + 1}`;
+                sendCommand("ConnectRdp", systemInfo.computername, 0)    
             });
 
             const hostname = document.createElement('div');
-            hostname.innerHTML = `<h2 style="margin: 0px">${pcData.output.computername || 'N/A'}</h2>`;
+            hostname.innerHTML = `<h2 style="margin: 0px">${systemInfo.computername || 'N/A'}</h2>`;
 
             const userTable = document.createElement('div');
             userTable.innerHTML = `
@@ -63,26 +63,25 @@
                     <th style="border-right: 0px;">Logon Time</th>
                   </tr>
                   <tr class="bottom-row">
-                    <td style="border-left: 0px;" id="${pcData.output.computername}-username"></td>
-                    <td id="${pcData.output.computername}-sessionname"></td>
-                    <td id="${pcData.output.computername}-id"></td>
-                    <td id="${pcData.output.computername}-state"></td>
-                    <td id="${pcData.output.computername}-idletime"></td>
-                    <td style="border-right: 0px;" id="${pcData.output.computername}-logontime"></td>
+                    <td style="border-left: 0px;" id="${systemInfo.computername}-username"></td>
+                    <td id="${systemInfo.computername}-sessionname"></td>
+                    <td id="${systemInfo.computername}-id"></td>
+                    <td id="${systemInfo.computername}-state"></td>
+                    <td id="${systemInfo.computername}-idletime"></td>
+                    <td style="border-right: 0px;" id="${systemInfo.computername}-logontime"></td>
                   </tr>
                 </table>`;
-            //currentUser.innerHTML = `<span id="${pcData.output.computername}"class="status-label">loading...</span>`;
 
             const sysinfo = document.createElement('div');
             sysinfo.classList.add('system-info-list');
             sysinfo.innerHTML = `
               <h2>System Info:</h2>
                 <ul>
-                    <li><span class="status-label">Diskspace:</span>${pcData.output.freespace} GB free out of ${pcData.output.drivesize} GB</li>
+                    <li><span class="status-label">Diskspace:</span>${systemInfo.freespace} GB free out of ${systemInfo.drivesize} GB</li>
                     <li><span class="status-label">BIOS Info:</span> N/A</li>
                     <li><span class="status-label">OS:</span> N/A</li>
                     <li><span class="status-label">CPU Info:</span> N/A</li>
-                    <li><span class="status-label">Last Reboot:</span> ${convertJsonDate(pcData.output.lastreboot)}</li>
+                    <li><span class="status-label">Last Reboot:</span> ${convertJsonDate(systemInfo.lastreboot)}</li>
                 </ul>
             `;
 
@@ -95,7 +94,7 @@
                     <li><span class="status-label">Zscaler Agent:</span> N/A</li>
                     <li><span class="status-label">Crowdstrike Agent:</span> N/A</li>
                     <li><span class="status-label">Cisco Anyconnect Agent:</span> N/A</li>
-                    <li><span class="status-label">Visual Studio Code:</span>${pcData.output.visualstudio || 'N/A'}</li>
+                    <li><span class="status-label">Visual Studio Code:</span>${systemInfo.visualstudio || 'N/A'}</li>
                 </ul>
             `;
 
@@ -156,12 +155,17 @@
                 const result = await response.json();
 				statusMessageDiv.innerText = `Command: ${action} completed successfully.`;
                 console.log("Received data: ", result)
-                if(result && result.action)
-                {
+                if(result && result.action){
                     if(result.action == "GetSocPcInfo"){
-                        const pcSection =  createPCSection(result, index)
-                        leftPcContainer.appendChild(pcSection)
-                        sendCommand("GetCurrentUserInfo", null, 0)
+                        const systemNames = result.output;
+                        for(const system in systemNames){
+                            if (systemNames.hasOwnProperty(system)){
+                                console.log(`Key: ${system}, Value: ${systemNames[system]}`);
+                                const pcSection =  createPCSection(systemNames[system], system)
+                                leftPcContainer.appendChild(pcSection)
+                                sendCommand("GetCurrentUserInfo", null, 0)
+                            }
+                        }
                     }
                     if(result.action == "GetCurrentUserInfo"){
                         (document.getElementById(`${result.output.table[0]}-username`)).innerText = result.output.table[1];
@@ -169,11 +173,10 @@
                         (document.getElementById(`${result.output.table[0]}-id`)).innerText = result.output.table[3];
                         (document.getElementById(`${result.output.table[0]}-state`)).innerText = result.output.table[4];
                         (document.getElementById(`${result.output.table[0]}-idletime`)).innerText = result.output.table[5];
-                        (document.getElementById(`${result.output.table[0]}-logontime`)).innerText = result.output.table[6];
+                        (document.getElementById(`${result.output.table[0]}-logontime`)).innerText = `${result.output.table[6]} ${result.output.table[7]} ${result.output.table[8]}`;
                     }
                 }
-                else
-                {
+                else{
                     console.log("Received data but not handling specific action.")
                 }
 
@@ -185,12 +188,12 @@
             }
         }
         function setupSSE() {
+            loadingDiv.style.display = "block";
             console.log("setupSSE started"); // Log before creating the event source
             eventSource = new EventSource("/events");
 
             eventSource.onopen = function() {
                 console.log("SSE connection opened."); // Log when connection opens
-                sendCommand("GetSocPcInfo", null, 0)
             }
             eventSource.onmessage = function(event) {
                 if (!event.data || typeof event.data !== 'string') {
@@ -207,6 +210,10 @@
                         (document.getElementById(`${result.output.table[0]}-state`)).innerText = result.output.table[4];
                         (document.getElementById(`${result.output.table[0]}-idletime`)).innerText = result.output.table[5];
                         (document.getElementById(`${result.output.table[0]}-logontime`)).innerText = result.output.table[6];
+                        if(result.output.table[4] == "Active"){
+                            rdpButton = document.getElementsByClassName("rdp-button");
+                            rdpButton[0].style.backgroundColor = "gray";
+                        }
                     }
                 } catch (error) {
                     console.error("Error parsing SSE data:", error);
@@ -222,9 +229,10 @@
 
 
 		window.addEventListener('load', function() {
+            loadingDiv.style.display = "block";
             console.log("window load event started");
         	setupSSE();
-			loadingDiv.style.display = "none"; //hide the loading div on first load
+            sendCommand("GetSocPcInfo", null, 0)
             console.log("window load event finished");
         });
 

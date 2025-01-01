@@ -2,112 +2,96 @@
 {% extends "base.html" %}
 {% block title %}Logs{% endblock %}
 {% block content %}
+    <style>
+        #log-container {
+            height: 600px;       /* Adjust to your desired height */
+            overflow-y: scroll; /* Enable vertical scrollbar */
+            padding: 10px; /* Optional padding */
+            justify-content: space-around;
+            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0px 0px 6px 3px #00000077;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            background-color: #2d3748;
+        }
+        .log-line {
+          white-space: pre-wrap;
+          font-family: monospace; /*Optional, to improve readability*/
+        }
+    </style>
     <div class="heading-container">
         <h1>Logs</h1>
         <h4 id="status-message"></h4>
     </div>
     <div id="loading" style="display: none;">Loading...</div>
-    <div id="main-container">
-        <h1>Text File Content</h1>
-        <pre id="text-content"></pre>
-        <button onclick="fetchText()">Fetch Text</button>
-        <div id="left-pc-container"></div>
-            <div class="refresh-dropdown">
-                <label for="refreshInterval">Refresh Interval:</label>
-                <select id="refreshInterval" class="refresh-interval-select">
-                    <option value="-1">Off</option>
-                    <option value="5">5 Seconds</option>
-                    <option value="10">10 Seconds</option>
-                    <option value="30">30 Seconds</option>
-                    <option value="60">1 Minute</option>
-                    <option value="120">2 Minutes</option>
-                    <option value="300">5 Minutes</option>
-                </select>
-            </div>
-     </div>
+
+    <div id="log-container">
+        <!-- Initial text will be populated here via loadTextOnPageLoad-->
+    </div>
+
 
 	<script>
-        const menuButtons = document.querySelectorAll(".menu-button");
         const resultDiv = document.getElementById("result");
 		const loadingDiv = document.getElementById("loading");
-        const HostnameDisplay = document.getElementById("HostnameDisplay");
-        const UsertableDisplay = document.getElementById("UsertableDisplay");
 		const statusMessageDiv = document.getElementById("status-message");
-        const leftPcContainer = document.getElementById("left-pc-container");
-        let eventSource = null;
-
-
-
-
-        async function fetchText() {
-            try {
-                const response = await fetch('/logs');
+        const logContainer = document.getElementById('log-container');
+ 
+        // When page is loaded, clear all old messages and fetch the latest logs
+        async function loadTextOnPageLoad() {
+           statusMessageDiv.innerText = 'Loading logs...';
+           try {
+                const response = await fetch('/logs', {method: 'GET'});
                 if (!response.ok) {
-                     throw new Error(`HTTP error! status: ${response.status}`);
+                  throw new Error(`HTTP error! status: ${response.status}`);
+                 }
+                const html = await response.text()
+                const startTag = '<pre id="text-content">';
+                const endTag = '</pre>';
+                let startPos = html.indexOf(startTag);
+                if(startPos === -1) {
+                    throw new Error("Could not find <pre> tag");
                 }
-                const data = await response.json();
-                document.getElementById('text-content').innerText = data.content;
+                let endPos = html.indexOf(endTag, startPos)
+                if(endPos === -1) {
+                   throw new Error("Could not find </pre> tag");
+                }
+                let content = html.substring(startPos + startTag.length, endPos)
+                // Create a new div with the class log-line for the log text.
+                 const div = document.createElement('div');
+                 div.classList.add('log-line')
+                 div.innerHTML = content
+                 logContainer.appendChild(div);
+                  //Auto Scroll to bottom on initial load
+                logContainer.scrollTop = logContainer.scrollHeight;
+                statusMessageDiv.innerText = 'Logs loaded successfully...';
+
             } catch (error) {
-                document.getElementById('text-content').innerText = 'Error fetching text:' + error;
-            }
+               const div = document.createElement('div');
+                div.innerText = 'Error loading text:' + error;
+                logContainer.appendChild(div)
+                statusMessageDiv.innerText = 'Error loading logs: ' + error;
+           }
         }
 
 
 
 
-        async function sendCommand(action, input, index) {
-            loadingDiv.style.display = "block";
-			statusMessageDiv.innerText = `Sending command from index.html: ${action}...`;
-              const body = {
-                    "action": action,
-                };
-            if(input)
-            {
-                body.input = input;
-            }
-            try {
-                const response = await fetch('/events', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(body),
-                });
-                if (!response.ok) {
-                    statusMessageDiv.innerText = `Error: Command: ${action} failed.`;
-                    loadingDiv.style.display = "none";
-                    const err = await response.json();
-                    throw new Error(err.error)
-                }
-
-                loadingDiv.style.display = "none";
-                const result = await response.json();
-				statusMessageDiv.innerText = `Command: ${action} completed successfully.`;
-                console.log("Received data: ", result)
-                if(result && result.action)
-                {
-                    
-                }
-                else
-                {
-                    console.log("Received data but not handling specific action.")
-                }
-
-            }
-            catch(error){
-                statusMessageDiv.innerText = `Command: ${action} had an error: ${error.message}`;
-                loadingDiv.style.display = "none";
-                console.error("Error:", error.message);
-            }
-        }
         function setupSSE() {
+            const logSource = new EventSource('/log-stream');
             console.log("setupSSE started"); // Log before creating the event source
-            eventSource = new EventSource("/events");
 
-            eventSource.onopen = function() {
+            logSource.onopen = function() {
                 console.log("SSE connection opened."); // Log when connection opens
             }
-            eventSource.onmessage = function(event) {
+            logSource.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                const div = document.createElement('div');
+                div.classList.add('log-line') // Assign the class log-line to maintain styles.
+                div.innerHTML = data.content // Set innerHTML so \n are rendered correctly.
+                logContainer.appendChild(div);
+                //Auto scroll to bottom on new content
+                logContainer.scrollTop = logContainer.scrollHeight;
                 if (!event.data || typeof event.data !== 'string') {
                     console.warn("Invalid event data:", event.data);
                     return;
@@ -122,8 +106,9 @@
                     console.error("Error Message:", error.message);
                 }
             };
-            eventSource.onerror = function(error) {
+            logSource.onerror = function(error) {
                 console.error("SSE error:", error);
+                document.getElementById('text-content').innerText = 'Error loading logs: SSE Error';
             };
         }
 
@@ -131,34 +116,15 @@
 		window.addEventListener('load', function() {
             console.log("window load event started");
         	setupSSE();
+            loadTextOnPageLoad();
 			loadingDiv.style.display = "none"; //hide the loading div on first load
             console.log("window load event finished");
-        });
-
-
-        // Get a reference to the select dropdown element
-        const refreshIntervalSelect = document.getElementById('refreshInterval');
-
-        // Attach an event listener to detect when the user makes a selection.
-        refreshIntervalSelect.addEventListener('change', function() {
-        // retrieve the value
-            const selectedInterval = parseInt(refreshIntervalSelect.value);
-            console.log('Selected Refresh Interval:', selectedInterval);
-            action = "changeRefreshInterval"
-            sendCommand(action, selectedInterval, 0)
-        });
-        
+        });        
 
         window.addEventListener('beforeunload', function() {
             if (eventSource) {
                 eventSource.close();
             }
-        });
-        menuButtons.forEach(button => {
-            button.addEventListener("click", function(){
-                const action = this.getAttribute('data-action');
-                sendCommand(action, null, 0);
-            });
         });
     </script>
 {% endblock %}

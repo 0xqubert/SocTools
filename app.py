@@ -1,15 +1,14 @@
 from flask import Flask, Response, jsonify, make_response, render_template, request
-import threading
-import datetime
-import socket
-import json
-import time
-import logging
-import traceback
-import atexit
-from urllib.parse import urlparse, parse_qs
-import re
-import queue
+                                   #https://flask.palletsprojects.com/en/stable/
+import os                          #https://github.com/python/cpython/blob/3.13/Lib/os.py
+import threading                   #https://github.com/python/cpython/blob/3.13/Lib/threading.py
+import datetime                    #https://github.com/python/cpython/blob/3.13/Lib/datetime.py
+import socket                      #https://github.com/python/cpython/blob/3.13/Lib/socket.py
+import json                        #https://github.com/python/cpython/blob/3.13/Lib/json/__init__.py
+import time                        #https://github.com/python/cpython/blob/main/Doc/library/time.rst
+import traceback                   #https://github.com/python/cpython/blob/3.13/Lib/traceback.py
+import atexit                      #https://github.com/python/cpython/blob/main/Doc/library/atexit.rst
+import queue                       #https://github.com/python/cpython/blob/3.13/Lib/queue.py
 
 app = Flask(__name__)
 
@@ -18,36 +17,16 @@ port = 65432
 delimiter = "__END_OF_RESPONSE__"
 sse_queue = queue.Queue() # Create a new Queue to pass data to sse.
 
-# Set up custom loggers
-socket_logger = logging.getLogger('socket_client')
-socket_logger.setLevel(logging.DEBUG)
-socket_handler = logging.StreamHandler()
-socket_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-socket_handler.setFormatter(socket_formatter)
-socket_logger.addHandler(socket_handler)
+def log_write(log_message):
+    logFile = "logs/SocTools.log"
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    log_line = f"{timestamp} -       app.py: {log_message}\n"
+    try:
+        with open(logFile, "a") as f:
+            f.write(log_line)
+    except Exception as e:
+        print(f"Error writing to log file {logFile}: {e}")
 
-app_logger = logging.getLogger('app')
-app_logger.setLevel(logging.DEBUG)
-app_handler = logging.StreamHandler()
-app_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-app_handler.setFormatter(app_formatter)
-app_logger.addHandler(app_handler)
-
-
-class CustomFormatter(logging.Formatter):
-    """A custom logging formatter that prepends the logger name."""
-    ANSI_ESCAPE = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
-
-    def format(self, record):
-      log_time = datetime.datetime.fromtimestamp(record.created).strftime('%Y-%m-%d %H:%M:%S')
-      if(isinstance(record.msg,str)):
-          cleaned_msg = CustomFormatter.ANSI_ESCAPE.sub('', record.msg)
-          return f"{log_time} - {record.name}: {cleaned_msg}"
-      else:
-          return f"{log_time} - {record.name}: {record.msg}"
-
-socket_handler.setFormatter(CustomFormatter())
-app_handler.setFormatter(CustomFormatter())
 
 class SocketClient:
     def __init__(self, host, port):
@@ -62,19 +41,20 @@ class SocketClient:
 
     def connect(self):
       try:
-          socket_logger.info(f"Attempting to connect to SocTools at: {self.host}:{self.port}")
+          log_write(f"Attempting to connect to SocTools at: {self.host}:{self.port}")
           self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
           self.socket.connect((self.host, self.port))
           local_address = self.socket.getsockname()
           ip, port = local_address
-          socket_logger.info(f"Connected Established!")
-          socket_logger.info(f"app.py({ip}:{port}) <---> SocTools.ps1({self.host}:{self.port})")
+          log_write(f"Connected Established!")
+          log_write(f"app.py({ip}:{port}) <---> SocTools.ps1({self.host}:{self.port})")
       except Exception as e:
-        socket_logger.error(f"Error connecting to socket: {e}\n {traceback.format_exc()}")
+        log_write(f"Error connecting to socket: {e}\n {traceback.format_exc()}")
+
     def send_command(self, command):
         try:
           if(self.socket == None or self.socket.fileno() == -1):
-             socket_logger.info("Reconnecting due to closed socket.")
+             log_write("Reconnecting due to closed socket.")
              self.connect()
           self.socket.sendall((command + '\n').encode('utf-8'))
           data = b""
@@ -91,15 +71,15 @@ class SocketClient:
           return result
 
         except Exception as e:
-           socket_logger.error(f"Error sending command to powershell: {e}\n {traceback.format_exc()}")
+           log_write(f"Error sending command to powershell: {e}\n {traceback.format_exc()}")
            return None
 
     def close(self):
         if self.socket:
-            socket_logger.info(f"Closing connection to {self.host}:{self.port}")
+            log_write(f"Closing connection to {self.host}:{self.port}")
             self.socket.close()
         else:
-            socket_logger.info("Socket already closed.")
+            log_write("Socket already closed.")
 
     def set_refresh_interval(self, value):
         self.auto_refresh_interval = value
@@ -118,7 +98,7 @@ class SocketClient:
                     log_write(f"Received from powershell before processing: {result}")# Added logging here.
                     sse_queue.put(result)
                 except Exception as e:
-                    socket_logger.error(f"Error sending keep alive: {e}\n {traceback.format_exc()}")
+                    log_write(f"Error sending keep alive: {e}\n {traceback.format_exc()}")
 
     def start_keep_alive_thread(self):
         keep_alive_thread = threading.Thread(target=self._send_keep_alive, daemon=True)
@@ -130,7 +110,7 @@ class SocketClient:
           try:
               self.send_command(json.dumps({"action": "keepalive"}))
           except Exception as e:
-              socket_logger.error(f"Error sending keep alive: {e}\n {traceback.format_exc()}")
+              log_write(f"Error sending keep alive: {e}\n {traceback.format_exc()}")
 # Instantiate the socket client at app startup
 socket_client = SocketClient(host, port)
 
@@ -146,16 +126,10 @@ def index():
     response.headers['Expires'] = '0'
     return response
 
+
 @app.route('/logs')
 def get_text_content():
-    logFile = "logs/SocTools.log"
-    try:
-        with open(logFile, 'r') as f:
-            text_content = f.read()
-    except FileNotFoundError:
-        text_content = "File Not Found"
-    response = make_response(render_template("logs.html", content=text_content))
-    return response
+    return render_template("logs.html")
 
 @app.route('/harddelete')
 def hard_delete():
@@ -203,16 +177,34 @@ def events():
             return { "error": "command not found"}
 
 
-def log_write(log_message):
-    logFile = "logs/SocTools.log"
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    log_line = f"{timestamp} - app.py: {log_message}\n"
-    try:
-        with open(logFile, "a") as f:
-            f.write(log_line)
-    except Exception as e:
-        print(f"Error writing to log file {logFile}: {e}")
 
+        
+
+def generate_log_events():
+    logFile = "logs/SocTools.log"
+    last_modified_time = os.path.getmtime(logFile)
+    try:
+        with open(logFile, 'r') as f:
+            text_content = f.read()
+            yield f"data: {json.dumps({'content': text_content})}\n\n"
+    except FileNotFoundError:
+        yield f"data: {json.dumps({'content': 'File Not Found'})}\n\n"
+
+    while True:
+        time.sleep(1)  # Check every second
+        current_modified_time = os.path.getmtime(logFile)
+        if current_modified_time != last_modified_time:
+            last_modified_time = current_modified_time
+            try:
+                with open(logFile, 'r') as f:
+                    text_content = f.read()
+                    yield f"data: {json.dumps({'content': text_content})}\n\n"
+            except FileNotFoundError:
+                    yield f"data: {json.dumps({'content': 'File Not Found'})}\n\n"
+
+@app.route('/log-stream')
+def log_stream():
+    return Response(generate_log_events(), mimetype='text/event-stream')
 
 def close_socket_connection():
     socket_client.close()

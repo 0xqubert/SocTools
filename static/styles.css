@@ -114,7 +114,7 @@ body {
 
 
 .refresh-dropdown {
-    display: inline-block;
+    display: grid;
     margin-bottom: 10px;
 }
 
