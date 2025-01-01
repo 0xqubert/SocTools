@@ -1,3 +1,7 @@
+#app.py
+#Author: Scott Stage
+#Created: 12/31/2024
+
 from flask import Flask, Response, jsonify, make_response, render_template, request
                                    #https://flask.palletsprojects.com/en/stable/
 import os                          #https://github.com/python/cpython/blob/3.13/Lib/os.py

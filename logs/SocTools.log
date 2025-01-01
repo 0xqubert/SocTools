@@ -3219,3 +3219,4 @@
 2024-12-31 17:28:33 - SocTools.ps1: Getting logged in user for DESKTOP-JUJ4D1S :
 2024-12-31 17:28:33 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'table': ['DESKTOP-JUJ4D1S', 'scott', 'console', '1', 'Active', 'none', '12/31/2024', '12:15', 'PM']}}
 2024-12-31 17:28:33 -       app.py: Generator Exited
+2024-12-31 17:32:29 - SocTools.ps1: Command received: {"action": "keepalive"}

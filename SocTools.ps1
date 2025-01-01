@@ -1,3 +1,7 @@
+#SocTools.ps1
+#Author: Scott Stage
+#Created: 12/31/2024
+
 <#Requires -RunAsAdministrator#>
 # Set the log file path
 $hostname = '127.0.0.1'
