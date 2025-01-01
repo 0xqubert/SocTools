@@ -7991,3 +7991,4 @@
 2024-12-29 21:06:10 - SocTools.ps1: Script execution completed.
 2024-12-29 21:06:10 - app.py: Response received: {'action': 'GetSocPcInfo', 'success': True, 'output': {'lastreboot': '/Date(1735503956500)/', 'computername': 'DESKTOP-JUJ4D1S', 'manufacturer': 'ASUS', 'ciscoanyconnect': None, 'forcepoint': None, 'currentuser': 'Scott', 'drive': 'G: Google Drive', 'zscaler': None, 'pingresult': None, 'freespace': 211.88, 'crowdstrike': None, 'model': 'System Product Name', 'visualstudio': 'Microsoft Visual Studio Code (User) - Version: 1.96.2', 'memory': 63.75, 'os': None, 'drivesize': 930.65}}
 2024-12-29 21:06:11 - app.py: Generator Exited
+2024-12-29 21:10:25 - SocTools.ps1: Command received: {"action": "keepalive"}
