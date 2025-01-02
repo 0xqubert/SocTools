@@ -1,0 +1,24 @@
+# Configuration settings for SocTools
+
+#location for logs to stored
+    logFile: "logs/SocTools.log"    
+
+#delimeter used to indicate end of response. The value must be set but is optional            
+    delimiter: "__END__"
+
+#Date format string used in the log generation. Can be modified, but must match their respective languages
+    dateFormatPowershell: "yyyy-MM-dd HH:mm:ss"
+    dateFormatPython: "%Y-%m-%d %H:%M:%S"
+
+#hostname and port used to serve the flask app (*DO NOT CHANGE*)
+    hostname: "127.0.0.1"
+    port: 65432
+
+#list of hostnames to be used in the application for gathering host information
+    computerList:
+      - "sys54618"
+      - "sys54619"
+      - "sys54622"
+      - "sys54623"
+      - "sys63926"
+      - "sys63896"

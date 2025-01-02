@@ -13,17 +13,27 @@ import time                        #https://github.com/python/cpython/blob/main/
 import traceback                   #https://github.com/python/cpython/blob/3.13/Lib/traceback.py
 import atexit                      #https://github.com/python/cpython/blob/main/Doc/library/atexit.rst
 import queue                       #https://github.com/python/cpython/blob/3.13/Lib/queue.py
+import yaml                        #https://yaml.org/
 
 app = Flask(__name__)
 
-host = '127.0.0.1'
-port = 65432
-delimiter = "__END__"
+def load_config_yaml(file_path):
+  with open(file_path, 'r') as f:
+      config = yaml.safe_load(f)
+  return config
+
+
+config = load_config_yaml("config.yaml")
+dateFormatPython = config["dateFormatPython"]
+hostname = config["hostname"]
+port = config["port"]
+logFile = config["logFile"]
+delimiter = config["delimiter"]
+
 sse_queue = queue.Queue() # Create a new Queue to pass data to sse.
 
 def log_write(log_message):
-    logFile = "logs/SocTools.log"
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    timestamp = datetime.datetime.now().strftime(dateFormatPython)
     log_line = f"{timestamp} -       app.py: {log_message}\n"
     try:
         with open(logFile, "a") as f:
@@ -32,9 +42,10 @@ def log_write(log_message):
         print(f"Error writing to log file {logFile}: {e}")
 
 
+
 class SocketClient:
-    def __init__(self, host, port):
-        self.host = host
+    def __init__(self, hostname, port):
+        self.hostname = hostname
         self.port = port
         self.socket = None
         self.connect()
@@ -45,13 +56,13 @@ class SocketClient:
 
     def connect(self):
       try:
-          log_write(f"Attempting to connect to SocTools at: {self.host}:{self.port}")
+          log_write(f"Attempting to connect to SocTools at: {self.hostname}:{self.port}")
           self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-          self.socket.connect((self.host, self.port))
+          self.socket.connect((self.hostname, self.port))
           local_address = self.socket.getsockname()
           ip, port = local_address
           log_write(f"Connected Established!")
-          log_write(f"app.py({ip}:{port}) <---> SocTools.ps1({self.host}:{self.port})")
+          log_write(f"app.py({ip}:{port}) <---> SocTools.ps1({self.hostname}:{self.port})")
       except Exception as e:
         log_write(f"Error connecting to socket: {e}\n {traceback.format_exc()}")
 
@@ -84,7 +95,7 @@ class SocketClient:
 
     def close(self):
         if self.socket:
-            log_write(f"Closing connection to {self.host}:{self.port}")
+            log_write(f"Closing connection to {self.hostname}:{self.port}")
             self.socket.close()
         else:
             log_write("Socket already closed.")
@@ -121,7 +132,7 @@ class SocketClient:
               log_write(f"Error sending keep alive: {e}\n {traceback.format_exc()}")
 
 # Instantiate the socket client at app startup
-socket_client = SocketClient(host, port)
+socket_client = SocketClient(hostname, port)
 
 @app.route('/')
 def index():

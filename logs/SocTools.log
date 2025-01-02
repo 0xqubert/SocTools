@@ -4245,3 +4245,450 @@ ConnectionResetError: [WinError 10054] An existing connection was forcibly close
                }
 }
 2025-01-01 15:43:23 -       app.py: Response received: {'action': 'GetCurrentUserInfo', 'success': True, 'output': {'DESKTOP-JUJ4D1S': {'username': 'scott', 'sessionname': 'console', 'id': '1', 'logontime': '1/1/2025 12:44 PM', 'idletime': 'none', 'computer': 'DESKTOP-JUJ4D1S', 'state': 'Active'}}}
+2025-01-01 15:48:04 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 15:48:04 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 15:48:04 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 15:53:05 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 15:53:05 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 15:53:05 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 15:58:05 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 15:58:05 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 15:58:05 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 16:03:05 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 16:03:05 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 16:03:05 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 16:08:05 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 16:08:05 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 16:08:05 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 16:13:06 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 16:13:06 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 16:13:06 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 16:18:06 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 16:18:06 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 16:18:06 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 16:23:06 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 16:23:06 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 16:23:06 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 16:28:06 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 16:28:06 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 16:28:06 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 16:33:07 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 16:33:07 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 16:33:07 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 16:38:07 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 16:38:07 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 16:38:07 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 16:43:07 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 16:43:07 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 16:43:07 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 16:48:07 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 16:48:07 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 16:48:07 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 16:53:07 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 16:53:07 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 16:53:08 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 16:58:08 - SocTools.ps1: Command received: {"action": "keepalive"}
+2025-01-01 16:58:08 -       app.py: Debug: Raw data received: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}__END__
+
+2025-01-01 16:58:08 -       app.py: Debug: data_str before json.loads: {
+    "action":  "keepalive",
+    "success":  true,
+    "output":  null
+}
+2025-01-01 17:03:05 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:03:05 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 17:03:05 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:03:05 - SocTools.ps1: SocTools.ps1 started. Process ID: 3420
+2025-01-01 17:03:05 - SocTools.ps1: app.py started. Process ID: 37348
+2025-01-01 17:03:05 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 17:03:06 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 17:03:06 -       app.py: Connected Established!
+2025-01-01 17:03:06 -       app.py: app.py(127.0.0.1:60970) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 17:03:06 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:60970
+2025-01-01 17:03:06 - SocTools.ps1: Connection Established!
+2025-01-01 17:03:06 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:60970)
+2025-01-01 17:03:06 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:03:06 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 17:03:06 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:03:12 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 17:03:12 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 17:03:12 - SocTools.ps1: Computer sys54618 is reachable.
+2025-01-01 17:03:12 - SocTools.ps1:   Gathering system information...
+2025-01-01 17:03:17 - SocTools.ps1:     Error: Could not retrieve Win32_ComputerSystem data.
+2025-01-01 17:03:17 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 17:03:23 - SocTools.ps1:     Error: Could not retrieve Win32_LogicalDisk data.
+2025-01-01 17:03:23 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 17:03:26 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 17:03:26 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 17:03:26 - SocTools.ps1: Computer sys54619 is reachable.
+2025-01-01 17:03:26 - SocTools.ps1:   Gathering system information...
+2025-01-01 17:03:32 - SocTools.ps1:     Error: Could not retrieve Win32_ComputerSystem data.
+2025-01-01 17:03:32 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 17:03:37 - SocTools.ps1:     Error: Could not retrieve Win32_LogicalDisk data.
+2025-01-01 17:03:37 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 17:03:38 - SocTools.ps1: TCP connection from 127.0.0.1:60970 closed.
+2025-01-01 17:03:38 - SocTools.ps1: Terminating app.py
+2025-01-01 17:13:18 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 17:13:18 -       app.py: Connected Established!
+2025-01-01 17:13:18 -       app.py: app.py(127.0.0.1:56496) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 17:13:39 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:13:39 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 17:13:39 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:13:39 - SocTools.ps1: SocTools.ps1 started. Process ID: 9740
+2025-01-01 17:13:39 - SocTools.ps1: app.py started. Process ID: 35412
+2025-01-01 17:13:39 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 17:13:40 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 17:13:40 -       app.py: Connected Established!
+2025-01-01 17:13:40 -       app.py: app.py(127.0.0.1:56532) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 17:13:40 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:56532
+2025-01-01 17:13:40 - SocTools.ps1: Connection Established!
+2025-01-01 17:13:40 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:56532)
+2025-01-01 17:13:40 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:13:40 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 17:13:40 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:13:43 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 17:13:43 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 17:13:43 - SocTools.ps1: Computer sys54618 is reachable.
+2025-01-01 17:13:43 - SocTools.ps1:   Gathering system information...
+2025-01-01 17:13:48 - SocTools.ps1:     Error: Could not retrieve Win32_ComputerSystem data.
+2025-01-01 17:13:48 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 17:13:54 - SocTools.ps1:     Error: Could not retrieve Win32_LogicalDisk data.
+2025-01-01 17:13:54 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 17:13:57 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 17:13:57 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 17:13:57 - SocTools.ps1: Computer sys54619 is reachable.
+2025-01-01 17:13:57 - SocTools.ps1:   Gathering system information...
+2025-01-01 17:14:00 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 17:14:03 - SocTools.ps1:     Error: Could not retrieve Win32_ComputerSystem data.
+2025-01-01 17:14:03 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 17:14:08 - SocTools.ps1:     Error: Could not retrieve Win32_LogicalDisk data.
+2025-01-01 17:14:08 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 17:14:09 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 17:14:10 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 17:14:10 - SocTools.ps1: Computer sys54622 is reachable.
+2025-01-01 17:14:10 - SocTools.ps1:   Gathering system information...
+2025-01-01 17:14:15 - SocTools.ps1:     Error: Could not retrieve Win32_ComputerSystem data.
+2025-01-01 17:14:15 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 17:14:21 - SocTools.ps1:     Error: Could not retrieve Win32_LogicalDisk data.
+2025-01-01 17:14:21 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 17:14:22 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 17:14:23 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 17:14:23 - SocTools.ps1: Computer sys54623 is reachable.
+2025-01-01 17:14:23 - SocTools.ps1:   Gathering system information...
+2025-01-01 17:14:28 - SocTools.ps1:     Error: Could not retrieve Win32_ComputerSystem data.
+2025-01-01 17:14:28 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 17:24:18 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:24:18 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 17:24:18 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:24:18 - SocTools.ps1: SocTools.ps1 started. Process ID: 22704
+2025-01-01 17:24:18 - SocTools.ps1: app.py started. Process ID: 19028
+2025-01-01 17:24:18 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 17:24:18 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 17:24:18 -       app.py: Connected Established!
+2025-01-01 17:24:18 -       app.py: app.py(127.0.0.1:49641) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 17:24:18 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:49641
+2025-01-01 17:24:18 - SocTools.ps1: Connection Established!
+2025-01-01 17:24:18 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:49641)
+2025-01-01 17:24:18 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:24:18 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 17:24:18 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:24:23 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 17:24:23 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 17:24:23 - SocTools.ps1: Computer sys54618 is reachable.
+2025-01-01 17:24:23 - SocTools.ps1:   Gathering system information...
+2025-01-01 17:24:29 - SocTools.ps1:     Error: Could not retrieve Win32_ComputerSystem data.
+2025-01-01 17:24:29 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 17:24:34 - SocTools.ps1:     Error: Could not retrieve Win32_LogicalDisk data.
+2025-01-01 17:24:34 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 17:24:37 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 17:24:37 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 17:24:38 - SocTools.ps1: Computer sys54619 is reachable.
+2025-01-01 17:24:38 - SocTools.ps1:   Gathering system information...
+2025-01-01 17:24:39 -       app.py: Error sending command to powershell: [WinError 10054] An existing connection was forcibly closed by the remote host
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 86, in send_command
+    chunk = self.socket.recv(4096)
+            ^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+2025-01-01 17:24:39 -       app.py: Response received: None
+2025-01-01 17:46:16 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:46:16 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 17:46:16 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:46:16 - SocTools.ps1: SocTools.ps1 started. Process ID: 12608
+2025-01-01 17:46:16 - SocTools.ps1: app.py started. Process ID: 35116
+2025-01-01 17:46:16 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 17:46:30 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 17:46:30 -       app.py: Connected Established!
+2025-01-01 17:46:30 -       app.py: app.py(127.0.0.1:56064) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 17:46:30 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:56064
+2025-01-01 17:46:30 - SocTools.ps1: Connection Established!
+2025-01-01 17:46:30 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:56064)
+2025-01-01 17:46:30 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:46:30 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 17:46:30 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:46:35 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 17:46:35 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 17:46:35 - SocTools.ps1: Computer sys54618 is reachable.
+2025-01-01 17:46:35 - SocTools.ps1:   Gathering system information...
+2025-01-01 17:46:44 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:46:44 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 17:46:44 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:46:44 - SocTools.ps1: SocTools.ps1 started. Process ID: 34864
+2025-01-01 17:46:44 - SocTools.ps1: app.py started. Process ID: 16332
+2025-01-01 17:46:44 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 17:48:08 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:48:08 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 17:48:08 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:48:08 - SocTools.ps1: SocTools.ps1 started. Process ID: 36208
+2025-01-01 17:48:08 - SocTools.ps1: app.py started. Process ID: 35968
+2025-01-01 17:48:08 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 17:48:43 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:48:43 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 17:48:43 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:48:43 - SocTools.ps1: SocTools.ps1 started. Process ID: 36720
+2025-01-01 17:48:43 - SocTools.ps1: app.py started. Process ID: 36740
+2025-01-01 17:48:43 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 17:48:50 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 17:48:50 -       app.py: Connected Established!
+2025-01-01 17:48:50 -       app.py: app.py(127.0.0.1:64534) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 17:48:50 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:64534
+2025-01-01 17:48:50 - SocTools.ps1: Connection Established!
+2025-01-01 17:48:50 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:64534)
+2025-01-01 17:48:50 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:48:50 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 17:48:50 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:48:54 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 17:48:54 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 17:48:54 - SocTools.ps1: Computer sys54618 is reachable.
+2025-01-01 17:48:54 - SocTools.ps1:   Gathering system information...
+2025-01-01 17:49:00 - SocTools.ps1:     Error: Could not retrieve Win32_ComputerSystem data.
+2025-01-01 17:49:00 - SocTools.ps1:   Gathering disk space information...
+2025-01-01 17:49:05 - SocTools.ps1:     Error: Could not retrieve Win32_LogicalDisk data.
+2025-01-01 17:49:05 - SocTools.ps1:   Gathering installed software information...
+2025-01-01 17:49:08 - SocTools.ps1:     *No software matching name "Crowdstrike" was found*
+2025-01-01 17:49:09 - SocTools.ps1:     *No software matching name "Zscaler" was found*
+2025-01-01 17:49:09 - SocTools.ps1: Computer sys54619 is reachable.
+2025-01-01 17:49:09 - SocTools.ps1:   Gathering system information...
+2025-01-01 17:52:53 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:52:53 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 17:52:53 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:52:53 - SocTools.ps1: SocTools.ps1 started. Process ID: 6832
+2025-01-01 17:52:53 - SocTools.ps1: app.py started. Process ID: 31460
+2025-01-01 17:52:53 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 17:54:25 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:54:25 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 17:54:25 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:54:25 - SocTools.ps1: SocTools.ps1 started. Process ID: 15436
+2025-01-01 17:54:25 - SocTools.ps1: app.py started. Process ID: 35000
+2025-01-01 17:54:25 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 17:55:23 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 17:55:23 -       app.py: Connected Established!
+2025-01-01 17:55:23 -       app.py: app.py(127.0.0.1:60843) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 17:55:27 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 17:55:30 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:55:30 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 17:55:30 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:55:30 - SocTools.ps1: SocTools.ps1 started. Process ID: 15436
+2025-01-01 17:55:30 - SocTools.ps1: app.py started. Process ID: 33300
+2025-01-01 17:55:30 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 17:55:57 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:55:57 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 17:55:57 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 17:55:57 - SocTools.ps1: SocTools.ps1 started. Process ID: 2504
+2025-01-01 17:55:57 - SocTools.ps1: app.py started. Process ID: 324
+2025-01-01 17:55:57 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 17:59:21 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 17:59:23 -       app.py: Error connecting to socket: [WinError 10061] No connection could be made because the target machine actively refused it
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 61, in connect
+    self.socket.connect((self.hostname, self.port))
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+2025-01-01 17:59:28 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 17:59:28 -       app.py: Error sending command to powershell: [WinError 10057] A request to send or receive data was disallowed because the socket is not connected and (when sending on a datagram socket using a sendto call) no address was supplied
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 74, in send_command
+    self.socket.sendall((command + '\n').encode('utf-8'))
+OSError: [WinError 10057] A request to send or receive data was disallowed because the socket is not connected and (when sending on a datagram socket using a sendto call) no address was supplied
+
+2025-01-01 17:59:28 -       app.py: Response received: None
+2025-01-01 18:06:31 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 18:06:33 -       app.py: Error connecting to socket: [WinError 10061] No connection could be made because the target machine actively refused it
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 61, in connect
+    self.socket.connect((self.hostname, self.port))
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+2025-01-01 18:06:35 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 18:06:35 -       app.py: Error sending command to powershell: [WinError 10057] A request to send or receive data was disallowed because the socket is not connected and (when sending on a datagram socket using a sendto call) no address was supplied
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 74, in send_command
+    self.socket.sendall((command + '\n').encode('utf-8'))
+OSError: [WinError 10057] A request to send or receive data was disallowed because the socket is not connected and (when sending on a datagram socket using a sendto call) no address was supplied
+
+2025-01-01 18:06:35 -       app.py: Response received: None
+2025-01-01 18:10:34 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 18:10:36 -       app.py: Error connecting to socket: [WinError 10061] No connection could be made because the target machine actively refused it
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 61, in connect
+    self.socket.connect((self.hostname, self.port))
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+2025-01-01 18:10:39 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 18:10:39 -       app.py: Error sending command to powershell: [WinError 10057] A request to send or receive data was disallowed because the socket is not connected and (when sending on a datagram socket using a sendto call) no address was supplied
+ Traceback (most recent call last):
+  File "C:\Users\Scott\Desktop\SocTools\app.py", line 74, in send_command
+    self.socket.sendall((command + '\n').encode('utf-8'))
+OSError: [WinError 10057] A request to send or receive data was disallowed because the socket is not connected and (when sending on a datagram socket using a sendto call) no address was supplied
+
+2025-01-01 18:10:39 -       app.py: Response received: None
+2025-01-01 18:11:26 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 18:11:26 - SocTools.ps1: ------------------- SocTools Initializing -------------------
+2025-01-01 18:11:26 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 18:11:26 - SocTools.ps1: SocTools.ps1 started. Process ID: 36816
+2025-01-01 18:11:26 - SocTools.ps1: app.py started. Process ID: 31104
+2025-01-01 18:11:26 - SocTools.ps1: Listening on 127.0.0.1:65432
+2025-01-01 18:11:26 -       app.py: Attempting to connect to SocTools at: 127.0.0.1:65432
+2025-01-01 18:11:26 -       app.py: Connected Established!
+2025-01-01 18:11:26 -       app.py: app.py(127.0.0.1:63444) <---> SocTools.ps1(127.0.0.1:65432)
+2025-01-01 18:11:26 - SocTools.ps1: Accepted TCP connection from 127.0.0.1:63444
+2025-01-01 18:11:26 - SocTools.ps1: Connection Established!
+2025-01-01 18:11:26 - SocTools.ps1: SocTools.ps1(127.0.0.1:65432) <---> app.py(127.0.0.1:63444)
+2025-01-01 18:11:26 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 18:11:26 - SocTools.ps1: ------- SocTools is running at http://127.0.0.1:5000 --------
+2025-01-01 18:11:26 - SocTools.ps1: -------------------------------------------------------------
+2025-01-01 18:11:31 -       app.py: Sending Command: {'action': 'GetSocPcInfo'}
+2025-01-01 18:11:31 - SocTools.ps1: Command received: {"action": "GetSocPcInfo"}
+2025-01-01 18:11:31 - SocTools.ps1: Computer sys54618 is reachable.
+2025-01-01 18:11:31 - SocTools.ps1:   Gathering system information...

@@ -61,18 +61,12 @@ Created: 12/31/2024
                   <tr class="top-row">
                     <th style="border-left: 0px;">Username</th>
                     <th>Session</th>
-                    <th>ID</th>
                     <th>State</th>
-                    <th>Idle Time</th>
-                    <th style="border-right: 0px;">Logon Time</th>
                   </tr>
                   <tr class="bottom-row">
-                    <td style="border-left: 0px;" id="${systemInfo.computername}-username"></td>
-                    <td id="${systemInfo.computername}-sessionname"></td>
-                    <td id="${systemInfo.computername}-id"></td>
-                    <td id="${systemInfo.computername}-state"></td>
-                    <td id="${systemInfo.computername}-idletime"></td>
-                    <td style="border-right: 0px;" id="${systemInfo.computername}-logontime"></td>
+                    <td style="border-left: 0px;" id="${key}-username"></td>
+                    <td id="${key}-sessionname"></td>
+                    <td id="${key}-state"></td>
                   </tr>
                 </table>`;
 
@@ -164,7 +158,6 @@ Created: 12/31/2024
                         const systemNames = result.output;
                         for(const system in systemNames){
                             if (systemNames.hasOwnProperty(system)){
-                                console.log(`Key: ${system}, Value: ${systemNames[system]}`);
                                 const pcSection =  createPCSection(systemNames[system], system)
                                 leftPcContainer.appendChild(pcSection)
                                 
@@ -176,14 +169,11 @@ Created: 12/31/2024
                         const systemNames = result.output;
                         for(const system in systemNames){
                             if (systemNames.hasOwnProperty(system)){
-                                console.log(`Key: ${system}, Value: ${systemNames[system]}`);
-                                (document.getElementById(`${system}-username`)).innerText = systemNames[system].username;
-                                (document.getElementById(`${system}-sessionname`)).innerText = systemNames[system].sessionname;
-                                (document.getElementById(`${system}-id`)).innerText = systemNames[system].id;
-                                (document.getElementById(`${system}-state`)).innerText = systemNames[system].state;
-                                (document.getElementById(`${system}-idletime`)).innerText = systemNames[system].idletime;
-                                (document.getElementById(`${system}-logontime`)).innerText = systemNames[system].logontime;
-                                
+								if(systemNames[system].state == "Active"){
+									(document.getElementById(`${system}-username`)).innerText = systemNames[system].username;
+									(document.getElementById(`${system}-sessionname`)).innerText = systemNames[system].sessionname;
+									(document.getElementById(`${system}-state`)).innerText = systemNames[system].state;
+								}  
                             }
                         }
 
@@ -207,6 +197,7 @@ Created: 12/31/2024
 
             eventSource.onopen = function() {
                 console.log("SSE connection opened."); // Log when connection opens
+				sendCommand("GetSocPcInfo", null, 0)
             }
             eventSource.onmessage = function(event) {
                 if (!event.data || typeof event.data !== 'string') {
@@ -234,7 +225,6 @@ Created: 12/31/2024
             loadingDiv.style.display = "block";
             console.log("window load event started");
         	setupSSE();
-            sendCommand("GetSocPcInfo", null, 0)
             console.log("window load event finished");
         });
 

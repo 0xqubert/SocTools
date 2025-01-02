@@ -1,25 +1,36 @@
 #SocTools.ps1
 #Author: Scott Stage
 #Created: 12/31/2024
-<#Requires -RunAsAdministrator#>
-# Set the log file path
-$hostname = '127.0.0.1'
-$port = 65432
+
+if(-not (Get-Module powershell-yaml -ListAvailable)){
+	Install-Module -Name powershell-yaml -Scope CurrentUser -Force #https://www.powershellgallery.com/packages/powershell-yaml/0.4.7
+}
+Import-Module powershell-yaml
+
 $appProcess = $null
-$logFile = "logs\SocTools.log"  #Change this to your desired log path
-$delimiter = "__END__"
-$computerList = @(
-            "DESKTOP-JUJ4D1S"#,
-            #"DESKTOP-B1N8PA8"
-            #"computer2",
-            #"computer3"
-            # Add more computer names as needed
-        )
+$config = Get-Content -Path 'config.yaml' | ConvertFrom-Yaml
+$dateFormatPowershell = $config.dateFormatPowershell
+$computerList = $config.computerList
+$delimiter = $config.delimiter
+$hostname = $config.hostname
+$port = $config.port
+$logFile = $config.logFile 
+
+
+# Function to Launch app.py
+function Start-AppPy {
+    # Start app.py with named pipe argument
+    $process = Start-Process -FilePath "python-3.12.0-embed\python.exe" -ArgumentList "app.py" -PassThru
+    # Return information about the process
+    return @{
+        Process = $process
+    }
+}
 
 # Function to write to log
 function LogWrite([string]$logMessage)
 {
-    $currentTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $currentTime = Get-Date -Format $dateFormatPowershell
      try {
         Add-Content -Path $logFile -Value "$currentTime - SocTools.ps1: $logMessage" -ErrorAction Stop
     }
@@ -199,9 +210,11 @@ function GetCurrentUserInfo($result){
         $tableSubstring = (query user)[0] -split '\s+'
         $tableHeaders = '         '   
         $tableHeaders += $tableSubstring[1] + '                                       ' + $tableSubstring[2] + '         ' + $tableSubstring[3] + ' ' + $tableSubstring[4] + '       ' + $tableSubstring[5] + '   ' + $tableSubstring[6]
-        $fullstring = ""
         foreach ($computer in $computerList) {
-            LogWrite("Getting logged in user for $computer :")
+			$string = ""
+			$userID = $null
+			
+            LogWrite -logMessage ("Getting logged in user for $computer :")
             if (!(Test-Connection $computer -Count 1 -Quiet)){
                  LogWrite -logMessage ("    Error: $computer is unreachable")
             }
@@ -219,30 +232,27 @@ function GetCurrentUserInfo($result){
                         $Parsed_Server[5] = $Parsed_Server[5].PadRight(6)
                         #Okay you can look again
                         $string += $Parsed_Server
-                        #$username = net user /domain $Parsed_Server[1]
-                        #$username = $username[3].Substring(9).Trim().PadRight(38)
-                        #$userID = ($o -split "\s+")[1]
+                        $username = net user /domain $Parsed_Server[1]
+                        $username = $username[3].Substring(9).Trim()
+                        $userID = ($o -split "\s+")[1]
                         break
                     }                               
                 }
+				LogWrite -logMessage ("UserId = $userID // Username = $username")
                 if($null -ne $userID){
-                    $string.Replace($userID, "(" + $userID + ") " + $username)
-                }else{
-                    $fullstring += $string
-                }
+					LogWrite -logMessage ("String before replace: $string")
+                    $string = $string.Replace($userID, "($userID) $username")
+					LogWrite -logMessage ("String after replace: $string")
+                }                      
             }
-            $fullstring = $fullstring -split '\s+'
+            $string = $string -split '\s+'
             $systemList["$computer"] = @{
-                "computer" =  $fullstring[0]
-                "username" =  $fullstring[1]
-                "sessionname" =  $fullstring[2]
-                "id" =  $fullstring[3]
-                "state" =  $fullstring[4]
-                "idletime" =  $fullstring[5]
-                "logontime" =  $fullstring[6] + " " + $fullstring[7] + " " + $fullstring[8]
+                "computer" =  $string[0]
+                "username" =  $string[1] + " " + $string[2] + " " + $string[3]
+                "sessionname" =  $string[4]
+                "state" =  $string[6]
             }
         }
-        
         $response.action = $($MyInvocation.MyCommand.Name)
         $response.success = $true
         $response.output = $systemList
@@ -471,15 +481,6 @@ function ClearResults(){
     LogWrite -logMessage "Finished ClearResults function."
 }
 
-# Function to Launch app.py
-function Start-AppPy {
-    # Start app.py with named pipe argument
-    $process = Start-Process -FilePath "python-3.12.0-embed\python.exe" -ArgumentList "app.py" -PassThru
-    # Return information about the process
-    return @{
-        Process = $process
-    }
-}
 
 function main(){
     # Start app.py and get the pipe information
@@ -600,5 +601,6 @@ function main(){
         }
     }
 }
+
 
 main
