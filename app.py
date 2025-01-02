@@ -68,30 +68,57 @@ class SocketClient:
 
     def send_command(self, command):
         try:
-            if(self.socket == None or self.socket.fileno() == -1):
+            if not self.is_socket_connected():
                 log_write("Reconnecting due to closed socket.")
                 self.connect()
+            if not self.is_socket_connected(): # verify that connect worked
+               log_write("Error reconnecting to socket, returning None.")
+               return None
+
             self.socket.sendall((command + '\n').encode('utf-8'))
             data = b""
+            start_time = time.time()
             while True:
-                chunk = self.socket.recv(4096)
-                if not chunk:
+                try:
+                    self.socket.settimeout(10) # sets timeout to 10 seconds
+                    chunk = self.socket.recv(4096)
+                    if not chunk:
+                        log_write("No data received in 10 seconds, breaking.")
+                        break
+                    data += chunk
+                    if delimiter.encode('utf-8') in data:
+                        break
+                except socket.timeout:
+                    log_write("Socket timed out during recv, breaking.")
                     break
-                data += chunk
-                if delimiter.encode('utf-8') in data:
+                except socket.error as se:
+                    log_write(f"Socket error during recv, closing socket and breaking: {se}\n {traceback.format_exc()}")
+                    self.socket.close()
+                    self.socket = None
                     break
-            data_str = data.decode('utf-8', 'ignore')
-            log_write(f"Debug: Raw data received: {data_str}")
-            if delimiter in data_str:
-                data_str = data_str.split(delimiter)[0]
-            data_str = data_str.strip()
-            log_write(f"Debug: data_str before json.loads: {data_str}")
-            result = json.loads(data_str)
-            return result
+                if time.time() - start_time > 20: # add timeout for the recv loop.
+                    log_write("Receive loop timed out after 20 seconds, breaking.")
+                    break
 
-        except Exception as e:
-            log_write(f"Error sending command to powershell: {e}\n {traceback.format_exc()}")
+            data_str = data.decode('utf-8', 'ignore') # Decode all of the data
+            log_write(f"Debug: Raw data received: {data_str}") # Log data here
+            if delimiter in data_str: # Verify delimiter is present
+                data_str = data_str.split(delimiter)[0] # Split before cleaning
+                data_str = data_str.strip()
+                log_write(f"Debug: data_str before json.loads: {data_str}")
+                result = json.loads(data_str)  # Attempt to parse
+                return result
+            else:
+                log_write(f"Error: Delimiter not found in data. Returning None.")
+                return None
+
+
+        except json.JSONDecodeError as json_err:
+            log_write(f"Error parsing json: {json_err}\nData: {data_str} {traceback.format_exc()}") # Get detailed error
             return None
+        except Exception as e:
+           log_write(f"Error sending command to powershell: {e}\n {traceback.format_exc()}")
+           return None
 
     def close(self):
         if self.socket:

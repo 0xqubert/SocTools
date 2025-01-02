@@ -8,24 +8,24 @@ Created: 12/31/2024
 {% block content %}
     <div class="heading-container">
         <h1>SOC PC Information</h1>
+        <div class="refresh-dropdown">
+            <label for="refreshInterval">Refresh Interval:</label>
+            <select id="refreshInterval" class="refresh-interval-select">
+                <option value="-1">Off</option>
+                <option value="5">5 Seconds</option>
+                <option value="10">10 Seconds</option>
+                <option value="30">30 Seconds</option>
+                <option value="60">1 Minute</option>
+                <option value="120">2 Minutes</option>
+                <option value="300">5 Minutes</option>
+            </select>
+        </div>
         <h4 id="status-message"></h4>
     </div>
     <div id="loading" style="display: none;">Loading...</div>
-    <div id="main-container">
-        <div id="left-pc-container"></div>
-            <div class="refresh-dropdown">
-                <label for="refreshInterval">Refresh Interval:</label>
-                <select id="refreshInterval" class="refresh-interval-select">
-                    <option value="-1">Off</option>
-                    <option value="5">5 Seconds</option>
-                    <option value="10">10 Seconds</option>
-                    <option value="30">30 Seconds</option>
-                    <option value="60">1 Minute</option>
-                    <option value="120">2 Minutes</option>
-                    <option value="300">5 Minutes</option>
-                </select>
-            </div>
-     </div>
+    
+    
+    <div id="pc-container"></div>
 
 	<script>
         const menuButtons = document.querySelectorAll(".menu-button");
@@ -34,7 +34,7 @@ Created: 12/31/2024
         const HostnameDisplay = document.getElementById("HostnameDisplay");
         const UsertableDisplay = document.getElementById("UsertableDisplay");
 		const statusMessageDiv = document.getElementById("status-message");
-        const leftPcContainer = document.getElementById("left-pc-container");
+        const pcContainer = document.getElementById("pc-container");
         let eventSource = null;
 
 
@@ -111,11 +111,11 @@ Created: 12/31/2024
 
             const pcInfoContainer = document.createElement('div');
             pcInfoContainer.classList.add('list-container'); // Add a container class
+            pcInfoContainer.appendChild(userContainer);
             pcInfoContainer.appendChild(sysinfo);
             pcInfoContainer.appendChild(software);
 
             pcSection.appendChild(headerContainer);
-            pcSection.appendChild(userContainer);
             pcSection.appendChild(pcInfoContainer);
 
             return pcSection;
@@ -159,7 +159,7 @@ Created: 12/31/2024
                         for(const system in systemNames){
                             if (systemNames.hasOwnProperty(system)){
                                 const pcSection =  createPCSection(systemNames[system], system)
-                                leftPcContainer.appendChild(pcSection)
+                                pcContainer.appendChild(pcSection)
                                 
                             }
                         }
